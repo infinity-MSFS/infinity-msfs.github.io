@@ -6,10 +6,6 @@ import { CanvasRevealEffect } from '../../components/aceternity/canvasReveal'
 export function LanguagesRust(): JSX.Element {
   return (
     <Card title="Rust backend" icon={<RustIcon />}>
-<<<<<<< Updated upstream
-      <CanvasRevealEffect animationSpeed={3} containerClassName="bg-black" colors={[[246, 76, 0]]} dotSize={2} />
-      <div className="absolute inset-0 [mask-image:radial-gradient(400px_at_center,white,transparent)] bg-black/50 dark:bg-black/90" />
-=======
       <CanvasRevealEffect
         animationSpeed={3}
         showGradient={false}
@@ -18,17 +14,12 @@ export function LanguagesRust(): JSX.Element {
         dotSize={2}
       />
       <div className="absolute inset-0 [mask-image:radial-gradient(300px_at_center,transparent,white)] bg-black/50 dark:bg-black/90" />
->>>>>>> Stashed changes
     </Card>
   )
 }
 export const LanguagesReact = (): JSX.Element => {
   return (
     <Card title="React frontend" icon={<ReactIcon />}>
-<<<<<<< Updated upstream
-      <CanvasRevealEffect animationSpeed={3} containerClassName="bg-black" colors={[[97, 218, 251]]} dotSize={2} />
-      <div className="absolute inset-0 [mask-image:radial-gradient(400px_at_center,white,transparent)] bg-black/50 dark:bg-black/90" />
-=======
       <CanvasRevealEffect
         animationSpeed={3}
         showGradient={false}
@@ -37,7 +28,6 @@ export const LanguagesReact = (): JSX.Element => {
         dotSize={2}
       />
       <div className="absolute inset-0 [mask-image:radial-gradient(300px_at_center,transparent,white)] bg-black/50 dark:bg-black/90" />
->>>>>>> Stashed changes
     </Card>
   )
 }
@@ -45,10 +35,6 @@ export const LanguagesReact = (): JSX.Element => {
 export const Simconnect = (): JSX.Element => {
   return (
     <Card title="Simconnect Built in" icon={<AirplaneIcon />}>
-<<<<<<< Updated upstream
-      <CanvasRevealEffect animationSpeed={3} containerClassName="bg-black" colors={[[50, 150, 255]]} dotSize={2} />
-      <div className="absolute inset-0 [mask-image:radial-gradient(400px_at_center,white,transparent)] bg-black/50 dark:bg-black/90" />
-=======
       <CanvasRevealEffect
         animationSpeed={3}
         showGradient={false}
@@ -57,18 +43,10 @@ export const Simconnect = (): JSX.Element => {
         dotSize={2}
       />
       <div className="absolute inset-0 [mask-image:radial-gradient(300px_at_center,transparent,white)] bg-black/50 dark:bg-black/90" />
->>>>>>> Stashed changes
     </Card>
   )
 }
 
-<<<<<<< Updated upstream
-export const CommunityFolder = () => {
-  return (
-    <Card title="Automatically locate Community Folder" icon={<FolderIcon />}>
-      <CanvasRevealEffect animationSpeed={3} containerClassName="bg-black" colors={[[255, 150, 255]]} dotSize={2} />
-      <div className="absolute inset-0 [mask-image:radial-gradient(400px_at_center,white,transparent)] bg-black/50 dark:bg-black/90" />
-=======
 export const CommunityFolder = (): JSX.Element => {
   return (
     <Card title="Automatically locate Community Folder" icon={<FolderIcon />}>
@@ -80,7 +58,6 @@ export const CommunityFolder = (): JSX.Element => {
         dotSize={2}
       />
       <div className="absolute inset-0 [mask-image:radial-gradient(300px_at_center,transparent,white)] bg-black/50 dark:bg-black/90" />
->>>>>>> Stashed changes
     </Card>
   )
 }
@@ -88,10 +65,6 @@ export const CommunityFolder = (): JSX.Element => {
 export const AutomaticUpdates = (): JSX.Element => {
   return (
     <Card title="Automatic Updates" icon={<SyncIcon />}>
-<<<<<<< Updated upstream
-      <CanvasRevealEffect animationSpeed={3} containerClassName="bg-black" colors={[[50, 150, 255]]} dotSize={2} />
-      <div className="absolute inset-0 [mask-image:radial-gradient(400px_at_center,white,transparent)] bg-black/50 dark:bg-black/90" />
-=======
       <CanvasRevealEffect
         animationSpeed={3}
         showGradient={false}
@@ -100,18 +73,10 @@ export const AutomaticUpdates = (): JSX.Element => {
         dotSize={2}
       />
       <div className="absolute inset-0 [mask-image:radial-gradient(300px_at_center,transparent,white)] bg-black/50 dark:bg-black/90" />
->>>>>>> Stashed changes
     </Card>
   )
 }
 
-<<<<<<< Updated upstream
-export const FragmentedDownloads = () => {
-  return (
-    <Card title="Fragmented Downloads" icon={<FragmentIcon />}>
-      <CanvasRevealEffect animationSpeed={3} containerClassName="bg-black" colors={[[50, 150, 255]]} dotSize={2} />
-      <div className="absolute inset-0 [mask-image:radial-gradient(400px_at_center,white,transparent)] bg-black/50 dark:bg-black/90" />
-=======
 export const FragmentedDownloads = (): JSX.Element => {
   return (
     <Card title="Fragmented Downloads" icon={<FragmentIcon />}>
@@ -123,7 +88,6 @@ export const FragmentedDownloads = (): JSX.Element => {
         dotSize={2}
       />
       <div className="absolute inset-0 [mask-image:radial-gradient(300px_at_center,transparent,white)] bg-black/50 dark:bg-black/90" />
->>>>>>> Stashed changes
     </Card>
   )
 }
@@ -162,12 +126,6 @@ const Card = ({
       </AnimatePresence>
 
       <div className="relative z-20">
-<<<<<<< Updated upstream
-        <div className="text-center group-hover/canvas-card:-translate-y-4 group-hover/canvas-card:opacity-0 transition duration-200 w-full text-wrap  mx-auto flex items-center justify-center">
-          {icon}
-        </div>
-        <h2 className="dark:text-white text-xl opacity-0 group-hover/canvas-card:opacity-100 relative z-10 text-center text-black mt-4  font-bold group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200">
-=======
         <div className="text-center group-hover/canvas-card:-translate-y-0 group-hover/canvas-card:opacity-50 group-hover/canvas-card:scale-90 transition duration-200 w-full text-wrap  mx-auto flex items-center justify-center">
           {icon}
         </div>
@@ -175,7 +133,6 @@ const Card = ({
           style={{ textShadow: 'black 2px 2px 0px, black 0px 0px 30px' }}
           className="dark:text-white p-4 text-2xl opacity-0 group-hover/canvas-card:opacity-100 relative z-10 text-center text-black mt-4  font-bold group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200"
         >
->>>>>>> Stashed changes
           {title}
         </h2>
       </div>
@@ -224,11 +181,7 @@ const FolderIcon = (): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="w-36" version="1.1" viewBox="0 0 512 347.28">
       <path
-<<<<<<< Updated upstream
-        fill="white"
-=======
         fill="rgb(155, 45, 250)"
->>>>>>> Stashed changes
         d="M121.35 118.09l260.64 0 0 -31.3c0.73,-7.76 -4.67,-9.69 -11.24,-9.98 -3.77,-0.18 -7.97,-0.2 -11.76,-0.01l-150.17 0c-36.03,0 -43.17,-19.04 -49.96,-37.13 -3.87,-10.32 -7.56,-20.17 -22.65,-20.17l-104.38 0c-6.76,0 -12.33,5.57 -12.33,12.33l0 253.04 61.44 -139.95c6.5,-14.82 24.13,-26.83 40.41,-26.83zm280.14 0l86.05 0c19.11,0 29.72,16.28 21.83,34.29l0.03 0.01 -73.77 168.06c-6.5,14.83 -24.14,26.83 -40.41,26.83l-366.19 0c-7.65,0 -13.84,-2.56 -18.08,-6.74 -6.2,-5.19 -10.95,-17.13 -10.95,-25.05l0 -283.66c0,-17.52 14.31,-31.83 31.83,-31.83l104.38 0c28.52,0 34.55,16.06 40.86,32.89 4.46,11.89 9.15,24.4 31.75,24.4 51.2,0 102.48,0.33 153.67,0.02 3.05,-0.03 6.18,-0.06 9.1,0.07 16.41,0.76 30.82,5.4 29.88,29.41l0.02 31.3zm85.97 19.05l-366.19 0c-8.66,0 -19,7.42 -22.44,15.25l-73.77 168.06 -0.03 -0.01c-2.05,4.68 -1.46,7.8 4.07,7.8l366.2 0c8.66,0 18.99,-7.43 22.43,-15.26l73.77 -168.06c0.07,0.03 4.09,-7.78 -4.04,-7.78z"
       />
     </svg>
@@ -239,11 +192,7 @@ const SyncIcon = (): JSX.Element => {
   return (
     <svg className="w-36" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path
-<<<<<<< Updated upstream
-        fill="cyan"
-=======
         fill="rgb(25, 150, 250)"
->>>>>>> Stashed changes
         d="M19.91,15.51H15.38a1,1,0,0,0,0,2h2.4A8,8,0,0,1,4,12a1,1,0,0,0-2,0,10,10,0,0,0,16.88,7.23V21a1,1,0,0,0,2,0V16.5A1,1,0,0,0,19.91,15.51ZM12,2A10,10,0,0,0,5.12,4.77V3a1,1,0,0,0-2,0V7.5a1,1,0,0,0,1,1h4.5a1,1,0,0,0,0-2H6.22A8,8,0,0,1,20,12a1,1,0,0,0,2,0A10,10,0,0,0,12,2Z"
       />
     </svg>
