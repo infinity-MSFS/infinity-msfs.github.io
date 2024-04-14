@@ -1,7 +1,7 @@
 import { BackgroundGradientAnimation } from '../../components/aceternity/gradientAnimation'
-import { Meteors } from '../../components/aceternity/meteors'
+
 import { TextGenerateEffect } from '../../components/aceternity/textGenerate'
-import { TypewriterEffect, TypewriterEffectSmooth } from '../../components/aceternity/typewriterEffect'
+
 import { Navbar } from '../../components/navbar/navbar'
 
 const name: string = 'Infinity'
