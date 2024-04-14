@@ -3,89 +3,31 @@ import React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { CanvasRevealEffect } from '../../components/aceternity/canvasReveal'
 
-export function LanguagesRust(): JSX.Element {
-  return (
-    <Card title="Rust backend" icon={<RustIcon />}>
-      <CanvasRevealEffect
-        animationSpeed={3}
-        showGradient={false}
-        containerClassName="bg-black"
-        colors={[[246, 76, 0]]}
-        dotSize={2}
-      />
-      <div className="absolute inset-0 [mask-image:radial-gradient(300px_at_center,transparent,white)] bg-black/50 dark:bg-black/90" />
-    </Card>
-  )
-}
-export const LanguagesReact = (): JSX.Element => {
-  return (
-    <Card title="React frontend" icon={<ReactIcon />}>
-      <CanvasRevealEffect
-        animationSpeed={3}
-        showGradient={false}
-        containerClassName="bg-black"
-        colors={[[97, 218, 251]]}
-        dotSize={2}
-      />
-      <div className="absolute inset-0 [mask-image:radial-gradient(300px_at_center,transparent,white)] bg-black/50 dark:bg-black/90" />
-    </Card>
-  )
+type AboutProps = {
+  title: string
+  icon: React.ReactNode
+  colors: number[][]
+  dotSize?: number
 }
 
-export const Simconnect = (): JSX.Element => {
+/**
+ * Renders the AboutComponent with the specified title, icon, colors, and dot size.
+ *
+ * @param {string} title - The title of the AboutComponent
+ * @param {React.ReactNode} icon - The icon for the AboutComponent
+ * @param {number[][]} colors - The colors for the AboutComponent
+ * @param {number} dotSize - The size of the dots
+ * @return {JSX.Element} The rendered AboutComponent
+ */
+export const AboutComponent = ({ title, icon, colors, dotSize = 1 }: AboutProps): JSX.Element => {
   return (
-    <Card title="Simconnect Built in" icon={<AirplaneIcon />}>
+    <Card title={title} icon={icon}>
       <CanvasRevealEffect
         animationSpeed={3}
         showGradient={false}
         containerClassName="bg-black"
-        colors={[[130, 155, 185]]}
-        dotSize={2}
-      />
-      <div className="absolute inset-0 [mask-image:radial-gradient(300px_at_center,transparent,white)] bg-black/50 dark:bg-black/90" />
-    </Card>
-  )
-}
-
-export const CommunityFolder = (): JSX.Element => {
-  return (
-    <Card title="Automatically locate Community Folder" icon={<FolderIcon />}>
-      <CanvasRevealEffect
-        animationSpeed={3}
-        showGradient={false}
-        containerClassName="bg-black"
-        colors={[[155, 45, 250]]}
-        dotSize={2}
-      />
-      <div className="absolute inset-0 [mask-image:radial-gradient(300px_at_center,transparent,white)] bg-black/50 dark:bg-black/90" />
-    </Card>
-  )
-}
-
-export const AutomaticUpdates = (): JSX.Element => {
-  return (
-    <Card title="Automatic Updates" icon={<SyncIcon />}>
-      <CanvasRevealEffect
-        animationSpeed={3}
-        showGradient={false}
-        containerClassName="bg-black"
-        colors={[[50, 150, 255]]}
-        dotSize={2}
-      />
-      <div className="absolute inset-0 [mask-image:radial-gradient(300px_at_center,transparent,white)] bg-black/50 dark:bg-black/90" />
-    </Card>
-  )
-}
-
-export const FragmentedDownloads = (): JSX.Element => {
-  return (
-    <Card title="Fragmented Downloads" icon={<FragmentIcon />}>
-      <CanvasRevealEffect
-        animationSpeed={3}
-        showGradient={false}
-        containerClassName="bg-black"
-        colors={[[255, 220, 45]]}
-        dotSize={2}
+        colors={colors}
+        dotSize={dotSize}
       />
       <div className="absolute inset-0 [mask-image:radial-gradient(300px_at_center,transparent,white)] bg-black/50 dark:bg-black/90" />
     </Card>
@@ -140,7 +82,7 @@ const Card = ({
   )
 }
 
-const ReactIcon = (): JSX.Element => {
+export const ReactIcon = (): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
       <g fill="#61DAFB">
@@ -151,7 +93,7 @@ const ReactIcon = (): JSX.Element => {
   )
 }
 
-const RustIcon = (): JSX.Element => {
+export const RustIcon = (): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
       <path
@@ -162,7 +104,7 @@ const RustIcon = (): JSX.Element => {
   )
 }
 
-const AirplaneIcon = (): JSX.Element => {
+export const AirplaneIcon = (): JSX.Element => {
   return (
     <svg className="w-32" xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox=" 0  0 400 400">
       <defs id="defs4" />
@@ -177,7 +119,7 @@ const AirplaneIcon = (): JSX.Element => {
   )
 }
 
-const FolderIcon = (): JSX.Element => {
+export const FolderIcon = (): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="w-36" version="1.1" viewBox="0 0 512 347.28">
       <path
@@ -188,7 +130,7 @@ const FolderIcon = (): JSX.Element => {
   )
 }
 
-const SyncIcon = (): JSX.Element => {
+export const SyncIcon = (): JSX.Element => {
   return (
     <svg className="w-36" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -199,7 +141,7 @@ const SyncIcon = (): JSX.Element => {
   )
 }
 
-const FragmentIcon = (): JSX.Element => {
+export const FragmentIcon = (): JSX.Element => {
   return (
     <svg
       className="w-36"
