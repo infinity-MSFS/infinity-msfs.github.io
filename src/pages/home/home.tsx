@@ -45,12 +45,12 @@ export const Home = (): JSX.Element => {
           />
         </div>
 
-        <div className="mt-[-5rem] absolute left-0 top-0 z-40 h-screen w-screen flex items-center justify-center overflow-hidden flex-col">
-          <div className="flex flex-row align-middle gap-2">
+        <div className="absolute left-0 top-0 z-40 h-screen w-screen flex items-center justify-center overflow-hidden flex-col">
+          <div className="flex flex-row align-middle justify-center gap-2">
             <InfinityLogo />
             <h1 className="text-4xl font-bold">{name}</h1>
           </div>
-          <TextGenerateEffect words={greeting} />
+          <TextGenerateEffect className="w-1/2" words={greeting} />
         </div>
       </div>
     </BackgroundGradientAnimation>
