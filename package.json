@@ -10,30 +10,39 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/fiber": "^8.16.2",
     "clsx": "^2.1.0",
     "eslint-config-prettier": "^9.0.0",
+    "framer-motion": "^11.0.28",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-markdown": "^9.0.1",
+    "react-router-dom": "^6.22.3",
+    "react-syntax-highlighter": "^15.5.0",
+    "remark-gfm": "^4.0.0",
     "sass": "^1.75.0",
-    "tailwind-merge": "^2.2.1"
+    "tailwind-merge": "^2.2.2",
+    "three": "^0.163.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
+    "@types/react-syntax-highlighter": "^15.5.11",
+    "@types/three": "^0.163.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.17",
     "eslint": "^8.57.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.2",
-    "autoprefixer": "^10.4.17",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
-    "tailwindcss": "^3.4.3",
     "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5",
     "vite": "^5.2.0"
   }
