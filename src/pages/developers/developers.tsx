@@ -50,8 +50,8 @@ export const Developers = (): JSX.Element => {
             released)
           </li>
           <li>
-            Ability to apply the appropriate GitHub task for package building to your aircraft's repo (we don't care if
-            its open source)
+            Ability to apply the appropriate GitHub task for package building to your aircraft&apos;s repo (we
+            don&apos;t care if its open source)
           </li>
           <li>Comply with the style guide (found below, the standards are very lenient)</li>
         </ul>
@@ -59,7 +59,7 @@ export const Developers = (): JSX.Element => {
       <div className="py-4 px-5 w-11/12 border shadow-glow-2xl shadow-white/20 rounded-md my-2 overflow-x-auto">
         <div className="text-2xl font-bold">Style Guide</div>
         <div>
-          When you submit a request to join the launcher, please include the desired style for your group's page:
+          When you submit a request to join the launcher, please include the desired style for your group&apos;s page:
           <SyntaxHighlighter language="ts">{code}</SyntaxHighlighter>
           <div className=" w-full flex flex-col items-center justify-center">
             <img
@@ -78,8 +78,8 @@ export const Developers = (): JSX.Element => {
         <div className="text-2xl font-bold">Simconnect</div>
         <div>
           Some projects require the use of external systems, implementing these are very developer dependent however any
-          developer group is welcome to modify backend functionality to accommodate their project's needs. If you are
-          one of these projects, consult with Taco or Techno on Discord for more details on how we would like you to
+          developer group is welcome to modify backend functionality to accommodate their project&apos;s needs. If you
+          are one of these projects, consult with Taco or Techno on Discord for more details on how we would like you to
           implement new features.
         </div>
       </div>
