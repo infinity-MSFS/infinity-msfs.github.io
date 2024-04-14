@@ -1,7 +1,4 @@
-import { BackgroundGradientAnimation } from '../../components/aceternity/gradientAnimation'
-
 import { TextGenerateEffect } from '../../components/aceternity/textGenerate'
-
 import { Navbar } from '../../components/navbar/navbar'
 
 const name: string = 'Infinity'
@@ -32,27 +29,26 @@ const InfinityLogo = (): JSX.Element => {
 export const Home = (): JSX.Element => {
   return (
     // h-20 is set in the navbar, which = 5rem
-    <BackgroundGradientAnimation interactive={false}>
-      <div className="h-screen w-screen dark:bg-black/90  dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative ">
-        <div className="absolute top-0 left-0 w-screen z-50 h-40">
-          <Navbar
-            opacity={40}
-            buttons={[
-              { string: 'Home', to: '/' },
-              { string: 'About', to: '/about' },
-              { string: 'Developers', to: '/developer' }
-            ]}
-          />
-        </div>
 
-        <div className="absolute left-0 top-0 z-40 h-screen w-screen flex items-center justify-center overflow-hidden flex-col">
-          <div className="flex flex-row align-middle justify-center gap-2">
-            <InfinityLogo />
-            <h1 className="text-4xl font-bold">{name}</h1>
-          </div>
-          <TextGenerateEffect className="w-1/2" words={greeting} />
-        </div>
+    <>
+      <div className="absolute top-0 left-0 w-screen z-50 h-40">
+        <Navbar
+          opacity={40}
+          buttons={[
+            { string: 'Home', to: '/' },
+            { string: 'About', to: '/about' },
+            { string: 'Developers', to: '/developer' }
+          ]}
+        />
       </div>
-    </BackgroundGradientAnimation>
+
+      <div className="absolute left-0 top-0 z-40 h-screen w-screen flex items-center justify-center overflow-hidden flex-col">
+        <div className="flex flex-row align-middle justify-center gap-2">
+          <InfinityLogo />
+          <h1 className="text-4xl font-bold">{name}</h1>
+        </div>
+        <TextGenerateEffect className="w-1/2" words={greeting} />
+      </div>
+    </>
   )
 }

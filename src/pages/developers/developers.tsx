@@ -37,7 +37,7 @@ const code = `{
 
 export const Developers = (): JSX.Element => {
   return (
-    <div className="flex flex-col  text-slate-300  gap-5 w-screen items-center">
+    <div className="flex flex-col absolute z-40 top-20 left-0  text-slate-300 bg-black/50  gap-5 w-screen items-center">
       <h1 className="text-4xl font-bold mt-8 mb-2">Developers</h1>
 
       <div className="py-4 px-5 w-11/12 border rounded-md shadow-glow-2xl shadow-white/20">

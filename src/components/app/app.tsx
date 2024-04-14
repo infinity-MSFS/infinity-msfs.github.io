@@ -4,6 +4,7 @@ import { Home } from '../../pages/home/home'
 import { Navbar } from '../navbar/navbar'
 import { Developers } from '../../pages/developers/developers'
 import { useEffect } from 'react'
+import { BackgroundGradientAnimation } from '../aceternity/gradientAnimation'
 
 export const App = (): JSX.Element => {
   const loc = useLocation()
@@ -18,21 +19,25 @@ export const App = (): JSX.Element => {
 
   return (
     <>
-      {location.pathname !== '/' && (
-        <Navbar
-          opacity={90}
-          buttons={[
-            { string: 'Home', to: '/' },
-            { string: 'About', to: '/about' },
-            { string: 'Developers', to: '/developer' }
-          ]}
-        />
-      )}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/developer" element={<Developers />} />
-      </Routes>
+      <BackgroundGradientAnimation interactive={false}>
+        <div className="h-screen w-screen dark:bg-black/90  dark:bg-dot-white/[0.2] overflow-y-auto bg-dot-black/[0.2] relative ">
+          {location.pathname !== '/' && (
+            <Navbar
+              opacity={90}
+              buttons={[
+                { string: 'Home', to: '/' },
+                { string: 'About', to: '/about' },
+                { string: 'Developers', to: '/developer' }
+              ]}
+            />
+          )}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/developer" element={<Developers />} />
+          </Routes>
+        </div>
+      </BackgroundGradientAnimation>
     </>
   )
 }
