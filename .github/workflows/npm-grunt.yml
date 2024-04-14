@@ -10,34 +10,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup Bun
-      uses: oven-sh/setup-bun@v1
-      with:
-        bun-version: "latest"
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: 'latest'
 
-    - name: Install dependencies
-      run: bun install
+      - name: Install dependencies
+        run: bun install
 
-    - name: Build project
-      run: bun run build
+      - name: Build project
+        run: bun run build
 
-    - name: Set Git identity
-      run: |
-        git config user.email "${{ secrets.GIT_EMAIL }}"
-        git config user.name "${{ secrets.GIT_NAME }}"
+      - name: Set Git identity
+        run: |
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          git config user.name "${{ secrets.GIT_NAME }}"
 
-    - name: Force push changes to production branch
-      run: |
-        git add .
-        git commit -m "Deploy to production branch"
-        git push --force origin HEAD:refs/heads/production
+      - name: Force push changes to production branch
+        run: |
+          git add .
+          git commit -m "Deploy to production branch"
+          git push --force origin HEAD:refs/heads/production
 
-    - name: Deploy to GitHub Pages
-      uses: actions/configure-pages@v5
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: 'dist'
-      uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'dist'
+
+      - name: Configure GitHub Pages deployment
+        uses: actions/deploy-pages@v4
