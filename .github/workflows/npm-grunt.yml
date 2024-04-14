@@ -29,6 +29,10 @@ jobs:
         shopt -s extglob
         rm -rf !(dist)
 
+    - name: Set Git identity
+      run: |
+        
+
     - name: Copy build artifacts to production branch
       run: |
         git checkout -b production
