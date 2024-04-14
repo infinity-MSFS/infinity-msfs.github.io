@@ -18,13 +18,16 @@ export const App = (): JSX.Element => {
 
   return (
     <>
-      <Navbar
-        buttons={[
-          { string: 'Home', to: '/' },
-          { string: 'About', to: '/about' },
-          { string: 'Developers', to: '/developer' }
-        ]}
-      />
+      {location.pathname !== '/' && (
+        <Navbar
+          opacity={90}
+          buttons={[
+            { string: 'Home', to: '/' },
+            { string: 'About', to: '/about' },
+            { string: 'Developers', to: '/developer' }
+          ]}
+        />
+      )}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

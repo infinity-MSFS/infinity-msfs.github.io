@@ -1,7 +1,11 @@
+import { BackgroundGradientAnimation } from '../../components/aceternity/gradientAnimation'
 import { Meteors } from '../../components/aceternity/meteors'
+import { TextGenerateEffect } from '../../components/aceternity/textGenerate'
+import { TypewriterEffect, TypewriterEffectSmooth } from '../../components/aceternity/typewriterEffect'
+import { Navbar } from '../../components/navbar/navbar'
 
 const name: string = 'Infinity'
-const greeting: string =
+const greeting =
   'Welcome to Infinity, The ultimate aircraft package installer and launcher for MSFS, designed for ease of use for both developers and users.'
 
 const InfinityLogo = (): JSX.Element => {
@@ -28,14 +32,27 @@ const InfinityLogo = (): JSX.Element => {
 export const Home = (): JSX.Element => {
   return (
     // h-20 is set in the navbar, which = 5rem
-    <div className="mt-[-5rem] z-50 h-screen w-screen flex items-center justify-center overflow-hidden flex-col">
-      <div className="flex flex-row align-middle gap-2">
-        <InfinityLogo />
-        <h1 className="text-4xl font-bold">{name}</h1>
-      </div>
+    <BackgroundGradientAnimation interactive={false}>
+      <div className="h-screen w-screen dark:bg-black/90  dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative ">
+        <div className="absolute top-0 left-0 w-screen z-50 h-40">
+          <Navbar
+            opacity={40}
+            buttons={[
+              { string: 'Home', to: '/' },
+              { string: 'About', to: '/about' },
+              { string: 'Developers', to: '/developer' }
+            ]}
+          />
+        </div>
 
-      <div>{greeting}</div>
-      <Meteors number={220} />
-    </div>
+        <div className="mt-[-5rem] absolute left-0 top-0 z-40 h-screen w-screen flex items-center justify-center overflow-hidden flex-col">
+          <div className="flex flex-row align-middle gap-2">
+            <InfinityLogo />
+            <h1 className="text-4xl font-bold">{name}</h1>
+          </div>
+          <TextGenerateEffect words={greeting} />
+        </div>
+      </div>
+    </BackgroundGradientAnimation>
   )
 }

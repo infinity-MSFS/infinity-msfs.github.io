@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 type T_navbarProps = {
   buttons: T_navbarButtonProps[]
+  opacity: number
 }
 type T_navbarButtonProps = {
   string: string
@@ -22,7 +23,7 @@ export const Navbar: FC<T_navbarProps> = (props: T_navbarProps): JSX.Element => 
       const isActive = loc.pathname === button.to
       return (
         <div
-          className={`${isActive ? ' font-bold underline' : ''} w-20`}
+          className={`${isActive ? ' underline' : ''} button-bar-button text-xl `}
           key={index}
           onClick={() => {
             handleNav(button.to)
@@ -37,10 +38,10 @@ export const Navbar: FC<T_navbarProps> = (props: T_navbarProps): JSX.Element => 
 
   return (
     <div
-      style={{ backdropFilter: 'saturate(0%) blur(10px)' }}
-      className="flex justify-between gap-10 items-center select-none flex-row w-full p-5 sticky top-0 left-0 h-20 border-b bg-black/50  z-50" // make this background blur the content behind it, we need to add a psudo element most likely
+      style={{ backdropFilter: 'blur(30px)' }}
+      className={`flex justify-between gap-10 items-center select-none flex-row w-screen p-5 pr-11 sticky top-0 left-0 h-20 border-b bg-black/${props.opacity}  z-50`} // make this background blur the content behind it, we need to add a psudo element most likely
     >
-      <div className="flex flex-row items-center justify-center gap-2 text-2xl font-bold">
+      <div className="flex flex-row items-center justify-center  gap-2 text-2xl font-bold">
         <InfinityLogo />
         Infinity
       </div>
