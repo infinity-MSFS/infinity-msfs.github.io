@@ -26,11 +26,8 @@ jobs:
 
     - name: Remove everything except dist folder
       run: |
-        mkdir temp
-        mv !(dist) temp
-        rm -rf *
-        mv temp/* .
-        rmdir temp
+        shopt -s extglob
+        rm -rf !(dist)
 
     - name: Copy build artifacts to production branch
       run: |
