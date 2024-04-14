@@ -37,10 +37,10 @@ export const Navbar: FC<T_navbarProps> = (props: T_navbarProps): JSX.Element => 
 
   return (
     <div
-      style={{ boxShadow: '0px 1px 10px rgba(255,255,255,0.8', backdropFilter: 'saturate(180%) blur(10px)' }}
+      style={{ backdropFilter: 'saturate(0%) blur(10px)' }}
       className="flex justify-between gap-10 items-center select-none flex-row w-full p-5 sticky top-0 left-0 h-20 border-b bg-black/50  z-50" // make this background blur the content behind it, we need to add a psudo element most likely
     >
-      <div className="flex flex-row items-center justify-center text-2xl">
+      <div className="flex flex-row items-center justify-center gap-2 text-2xl font-bold">
         <InfinityLogo />
         Infinity
       </div>

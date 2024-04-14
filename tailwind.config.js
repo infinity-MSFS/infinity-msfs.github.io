@@ -115,6 +115,9 @@ export default {
         '7/10': '70%',
         '8/10': '80%',
         '9/10': '90%'
+      },
+      boxShadow: {
+        'glow-2xl': '0 2px 75px -15px var(--tw-shadow-color)'
       }
     }
   },

@@ -21,7 +21,7 @@ export const CanvasRevealEffect = ({
   containerClassName?: string
   dotSize?: number
   showGradient?: boolean
-}) => {
+}): JSX.Element => {
   return (
     <div className={cn('h-full relative bg-white w-full', containerClassName)}>
       <div className="h-full w-full">
@@ -32,13 +32,23 @@ export const CanvasRevealEffect = ({
           shader={`
               float animation_speed_factor = ${animationSpeed.toFixed(1)};
               float intro_offset = distance(u_resolution / 2.0 / u_total_size, st2) * 0.01 + (random(st2) * 0.15);
-              opacity *= step(intro_offset, u_time * animation_speed_factor);
-              opacity *= clamp((1.0 - step(intro_offset + 0.1, u_time * animation_speed_factor)) * 1.25, 1.0, 1.25);
+              float u_t = 0.7 * pow(u_time, 0.5);
+              opacity *= step(intro_offset, u_t * animation_speed_factor);
+              opacity *= clamp((1.0 - step(intro_offset + 0.1, u_t * animation_speed_factor)) * 1.25, 1.0, 1.25);
             `}
           center={['x', 'y']}
         />
       </div>
-      {showGradient && <div className="absolute inset-0 bg-gradient-to-t from-gray-950 to-[84%]" />}
+      {showGradient && (
+        <div
+          style={{
+            backgroundImage: `linear-gradient(to bottom, transparent 0%, rgba(${colors[0][0] / 2}, ${
+              colors[0][1] / 2
+            }, ${colors[0][2] / 2}, 0.7) 100%)`
+          }}
+          className={`absolute inset-0 bg-gradient-to-t`}
+        />
+      )}
     </div>
   )
 }

@@ -1,7 +1,11 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 
+<<<<<<< Updated upstream
 const code = `
 {
+=======
+const code = `{
+>>>>>>> Stashed changes
  name: string
  projects: [
        {
@@ -39,6 +43,7 @@ const code = `
 export const Developers = (): JSX.Element => {
   return (
     <div className="flex flex-col  text-slate-300  gap-5 w-screen items-center">
+<<<<<<< Updated upstream
       <h1 className="mt-5 text-3xl  font-bold">Developers</h1>
 
       <div className=" p-3 w-11/12 border shadow-md shadow-white rounded-md ">
@@ -46,6 +51,15 @@ export const Developers = (): JSX.Element => {
           For a developer to be eligible to be on the launcher they must meet the following:
         </div>
         <ul className="list-disc pl-4">
+=======
+      <h1 className="text-4xl font-bold mt-8 mb-2">Developers</h1>
+
+      <div className="py-4 px-5 w-11/12 border rounded-md shadow-glow-2xl shadow-white/20">
+        <div className="text-2xl font-bold">
+          For a developer to be eligible to be on the launcher they must meet the following:
+        </div>
+        <ul className="list-disc pl-6">
+>>>>>>> Stashed changes
           <li>
             At least 1 downloadable package available to the public (we do not display development groups that have not
             released)
@@ -57,8 +71,13 @@ export const Developers = (): JSX.Element => {
           <li>Comply with the style guide (found below, the standards are very lenient)</li>
         </ul>
       </div>
+<<<<<<< Updated upstream
       <div className="w-11/12 border rounded-md overflow-x-scroll p-7 mt-7 mb-7 shadow-md shadow-white">
         <div className=" text-slate-200 text-xl">Style Guide</div>
+=======
+      <div className="py-4 px-5 w-11/12 border shadow-glow-2xl shadow-white/20 rounded-md my-2 overflow-x-auto">
+        <div className="text-2xl font-bold">Style Guide</div>
+>>>>>>> Stashed changes
         <div>
           When you submit a request to join the launcher, please include the desired style for your group's page:
           <SyntaxHighlighter language="ts">{code}</SyntaxHighlighter>
@@ -75,12 +94,21 @@ export const Developers = (): JSX.Element => {
         </div>
         <div></div>
       </div>
+<<<<<<< Updated upstream
       <div className="w-11/12 p-3 border shadow-md shadow-white rounded-md mt-7 mb-7">
         <div className="text-xl">Simconnect:</div>
         <div>
           Some projects require the use of external systems, implementing these are very developer dependent however any
           developer group is welcome to modify backend functionality to accommodate their project's needs. If you are
           one of these projects, consult with Taco or Techno on discord for more details on how we would like you to
+=======
+      <div className="py-4 px-5 w-11/12 border shadow-glow-2xl shadow-white/20 rounded-md my-2">
+        <div className="text-2xl font-bold">Simconnect</div>
+        <div>
+          Some projects require the use of external systems, implementing these are very developer dependent however any
+          developer group is welcome to modify backend functionality to accommodate their project's needs. If you are
+          one of these projects, consult with Taco or Techno on Discord for more details on how we would like you to
+>>>>>>> Stashed changes
           implement new features.
         </div>
       </div>

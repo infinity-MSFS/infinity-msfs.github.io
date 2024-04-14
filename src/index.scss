@@ -2,7 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  box-sizing: border-box;
+}
+
 :root {
+  overflow-x: hidden;
+  
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -15,24 +21,31 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 body {
   width: 100vw;
-  height: 100vw;
+  height: 100vh;
   // overflow: hidden;
 }
+
 pre {
   background-color: transparent !important;
   color: white !important;
   text-shadow: none !important;
-  overflow-x: scroll !important;
+  overflow-x: auto !important;
   left: 0px;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 1rem;
 }
+
 .language-ts {
   color: white !important;
   text-shadow: none !important;
 }
+
 .token {
   background: transparent !important;
 }
+
 #root {
 }
