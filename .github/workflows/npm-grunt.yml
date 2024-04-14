@@ -34,10 +34,12 @@ jobs:
         git config user.email "${{ secrets.GIT_EMAIL }}"
         git config user.name "${{ secrets.GIT_NAME }}"
 
-    - name: Push changes to production branch
+    - name: Checkout production branch
+      run: git checkout production
+
+    - name: Copy build artifacts to production branch
       run: |
-        git checkout production
         cp -r dist/. .
         git add .
         git commit -m "Deploy to production branch"
-        git push --force origin production
+        git push --force origin HEAD:production
