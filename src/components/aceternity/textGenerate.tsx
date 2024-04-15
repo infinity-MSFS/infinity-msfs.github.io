@@ -2,11 +2,11 @@ import { useEffect } from 'react'
 import { motion, stagger, useAnimate } from 'framer-motion'
 import { cn } from '../../util/cn'
 
-export const TextGenerateEffect = ({ words, className }: { words: string; className?: string }) => {
+export const TextGenerateEffect = ({ words, className }: { words: string; className?: string }): JSX.Element => {
   const [scope, animate] = useAnimate()
-  let wordsArray = words.split(' ')
+  const wordsArray = words.split(' ')
   useEffect(() => {
-    animate(
+    void animate(
       'span',
       {
         opacity: 1
@@ -18,7 +18,7 @@ export const TextGenerateEffect = ({ words, className }: { words: string; classN
     )
   }, [scope.current])
 
-  const renderWords = () => {
+  const renderWords = (): JSX.Element => {
     return (
       <motion.div ref={scope}>
         {wordsArray.map((word, idx) => {

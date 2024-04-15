@@ -32,7 +32,7 @@ export const CanvasRevealEffect = ({
           shader={`
               float animation_speed_factor = ${animationSpeed.toFixed(1)};
               float intro_offset = distance(u_resolution / 2.0 / u_total_size, st2) * 0.01 + (random(st2) * 0.15);
-              float u_t = 0.5 * pow(u_time, 1.0/3.0);
+              float u_t = 0.7 * pow(u_time, 0.5);
               opacity *= step(intro_offset, u_t * animation_speed_factor);
               opacity *= clamp((1.0 - step(intro_offset + 0.1, u_t * animation_speed_factor)) * 1.25, 1.0, 1.25);
             `}
@@ -53,13 +53,13 @@ export const CanvasRevealEffect = ({
   )
 }
 
-interface DotMatrixProps {
+type DotMatrixProps = {
   colors?: number[][]
   opacities?: number[]
   totalSize?: number
   dotSize?: number
   shader?: string
-  center?: ('x' | 'y')[]
+  center?: Array<'x' | 'y'>
 }
 
 const DotMatrix: React.FC<DotMatrixProps> = ({
@@ -147,12 +147,12 @@ const DotMatrix: React.FC<DotMatrixProps> = ({
   )
 }
 
-type Uniforms = {
-  [key: string]: {
-    value: number[] | number[][] | number
-    type: string
-  }
+type UniformType = {
+  value: number[] | number[][] | number
+  type: string
 }
+type Uniforms = Record<string, UniformType>
+
 const ShaderMaterial = ({
   source,
   uniforms,
@@ -162,13 +162,13 @@ const ShaderMaterial = ({
   hovered?: boolean
   maxFps?: number
   uniforms: Uniforms
-}) => {
+}): JSX.Element => {
   const { size } = useThree()
   const ref = useRef<THREE.Mesh>()
   let lastFrameTime = 0
 
   useFrame(({ clock }) => {
-    if (!ref.current) return
+    if (ref.current === undefined || ref.current === null) return
     const timestamp = clock.getElapsedTime()
     if (timestamp - lastFrameTime < 1 / maxFps) {
       return
@@ -180,11 +180,11 @@ const ShaderMaterial = ({
     timeLocation.value = timestamp
   })
 
-  const getUniforms = () => {
+  const getUniforms = (): any => {
     const preparedUniforms: any = {}
 
     for (const uniformName in uniforms) {
-      const uniform: any = uniforms[uniformName]
+      const uniform = uniforms[uniformName]
 
       switch (uniform.type) {
         case 'uniform1f':
@@ -192,7 +192,7 @@ const ShaderMaterial = ({
           break
         case 'uniform3f':
           preparedUniforms[uniformName] = {
-            value: new THREE.Vector3().fromArray(uniform.value),
+            value: new THREE.Vector3().fromArray(uniform.value as number[]),
             type: '3f'
           }
           break
@@ -201,13 +201,13 @@ const ShaderMaterial = ({
           break
         case 'uniform3fv':
           preparedUniforms[uniformName] = {
-            value: uniform.value.map((v: number[]) => new THREE.Vector3().fromArray(v)),
+            value: (uniform.value as any).map((v: number[]) => new THREE.Vector3().fromArray(v)),
             type: '3fv'
           }
           break
         case 'uniform2f':
           preparedUniforms[uniformName] = {
-            value: new THREE.Vector2().fromArray(uniform.value),
+            value: new THREE.Vector2().fromArray(uniform.value as number[]),
             type: '2f'
           }
           break
@@ -266,13 +266,9 @@ const Shader: React.FC<ShaderProps> = ({ source, uniforms, maxFps = 60 }) => {
     </Canvas>
   )
 }
-interface ShaderProps {
+
+type ShaderProps = {
   source: string
-  uniforms: {
-    [key: string]: {
-      value: number[] | number[][] | number
-      type: string
-    }
-  }
+  uniforms: Record<string, UniformType>
   maxFps?: number
 }

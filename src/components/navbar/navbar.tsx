@@ -1,5 +1,7 @@
-import { type FC } from 'react'
+import { useState, type FC, useRef, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import useWindowDimensions from '../../hooks/useWindowDimensions'
+import Hamburger from 'hamburger-react'
 
 type T_navbarProps = {
   buttons: T_navbarButtonProps[]
@@ -13,6 +15,27 @@ type T_navbarButtonProps = {
 export const Navbar: FC<T_navbarProps> = (props: T_navbarProps): JSX.Element => {
   const nav = useNavigate()
   const loc = useLocation()
+  const { width } = useWindowDimensions()
+
+  const [hamburger, setHamburger] = useState<boolean>(false)
+  const hamburgerMenuRef = useRef<HTMLDivElement>(null)
+  const hamburgerButtonRef = useRef<HTMLDivElement>(null)
+
+  const handleClickOutside = (event: MouseEvent): void => {
+    if (
+      hamburgerMenuRef.current !== null &&
+      !hamburgerMenuRef.current.contains(event.target as Node) &&
+      (hamburgerButtonRef.current === null || !hamburgerButtonRef.current.contains(event.target as Node))
+    ) {
+      setHamburger(false)
+    }
+  }
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   const handleNav = (to: string): void => {
     nav(to)
@@ -36,16 +59,61 @@ export const Navbar: FC<T_navbarProps> = (props: T_navbarProps): JSX.Element => 
     return buttons
   }
 
+  const getHamburger = (): JSX.Element => {
+    return (
+      <div ref={hamburgerButtonRef}>
+        <Hamburger toggled={hamburger} toggle={setHamburger} />
+      </div>
+    )
+  }
+
+  const hamburgerMenu = (): JSX.Element => {
+    const buttons = props.buttons.map((button: T_navbarButtonProps, index: number) => {
+      const isActive = loc.pathname === button.to
+      return (
+        <div
+          className={`${isActive ? ' underline' : ''} button-bar-button text-xl `}
+          key={index}
+          onClick={() => {
+            handleNav(button.to)
+            setHamburger(false)
+          }}
+        >
+          {button.string}
+        </div>
+      )
+    })
+    return (
+      <div
+        ref={hamburgerMenuRef}
+        style={{ backdropFilter: 'blur(30px)' }}
+        className="absolute top-20 bg-black/0 border-white border-b-2 w-screen flex items-center justify-center flex-col left-0"
+      >
+        {buttons}
+      </div>
+    )
+  }
+
+  const shouldShowHamburger: boolean = hamburger && width < 800
+
   return (
     <div
       style={{ backdropFilter: 'blur(30px)' }}
       className={`flex justify-between gap-10 items-center select-none flex-row w-screen p-5 pr-11 sticky top-0 left-0 h-20 border-b bg-black/${props.opacity}  z-50`} // make this background blur the content behind it, we need to add a psudo element most likely
     >
-      <div className="flex flex-row items-center justify-center  gap-2 text-2xl font-bold">
+      <div
+        onClick={() => {
+          nav('/')
+        }}
+        className="flex flex-row items-center justify-center  gap-2 text-2xl font-bold"
+      >
         <InfinityLogo />
         Infinity
       </div>
-      <div className="flex flex-row items-center justify-center gap-9">{getButtons()}</div>
+      <div className="flex flex-row items-center justify-center gap-9">
+        {width < 800 ? getHamburger() : getButtons()}
+      </div>
+      {shouldShowHamburger && hamburgerMenu()}
     </div>
   )
 }

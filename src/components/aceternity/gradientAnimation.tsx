@@ -31,7 +31,7 @@ export const BackgroundGradientAnimation = ({
   className?: string
   interactive?: boolean
   containerClassName?: string
-}) => {
+}): JSX.Element => {
   const interactiveRef = useRef<HTMLDivElement>(null)
 
   const [curX, setCurX] = useState(0)
@@ -52,10 +52,9 @@ export const BackgroundGradientAnimation = ({
   }, [])
 
   useEffect(() => {
-    function move() {
-      if (!interactiveRef.current) {
-        return
-      }
+    const move = (): void => {
+      if (interactiveRef.current === null) return
+
       setCurX(curX + (tgX - curX) / 20)
       setCurY(curY + (tgY - curY) / 20)
       interactiveRef.current.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`
@@ -64,8 +63,8 @@ export const BackgroundGradientAnimation = ({
     move()
   }, [tgX, tgY])
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (interactiveRef.current) {
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>): void => {
+    if (interactiveRef.current !== null) {
       const rect = interactiveRef.current.getBoundingClientRect()
       setTgX(event.clientX - rect.left)
       setTgY(event.clientY - rect.top)
