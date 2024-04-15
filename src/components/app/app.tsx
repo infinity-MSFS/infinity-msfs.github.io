@@ -10,18 +10,18 @@ export const App = (): JSX.Element => {
   const loc = useLocation()
 
   useEffect(() => {
-    if (loc.pathname === '/') {
+    if (location.hash === '#/') {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = 'auto'
     }
-  }, [loc.pathname])
+  }, [loc.hash])
 
   return (
     <>
       <BackgroundGradientAnimation interactive={false}>
         <div className="h-screen w-screen dark:bg-black/90  dark:bg-dot-white/[0.2] overflow-y-auto bg-dot-black/[0.2] relative ">
-          {location.pathname !== '/' && (
+          {location.hash !== '#/' && (
             <Navbar
               opacity={90}
               buttons={[
