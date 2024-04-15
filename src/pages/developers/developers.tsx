@@ -61,14 +61,21 @@ export const Developers = (): JSX.Element => {
         <div>
           When you submit a request to join the launcher, please include the desired style for your group&apos;s page:
           <SyntaxHighlighter language="ts">{code}</SyntaxHighlighter>
-          <div className=" w-full flex flex-col items-center justify-center">
+          <div className=" w-full gap-3 flex flex-col items-center justify-center">
             <img
-              src="https://cdn.discordapp.com/attachments/1228736837946704045/1228888293102452787/Untitled-1.png?ex=662dae68&is=661b3968&hm=e1ebf0bc71b05ef334810e66a2af02f14bc8ca59707bdf8e0250b9a3c699993a&"
+              className=" rounded-3xl shadow-lg shadow-white/10"
+              src="https://cdn.discordapp.com/attachments/1228736837946704045/1229282309908336690/projectspage-expl.png?ex=662f1d5d&is=661ca85d&hm=f824c8c04408c49aae907e05484c2bc8d714cfe1bbe87a2cc633ebcef81b397b&"
               alt="style ref"
             />
             <img
-              src="https://cdn.discordapp.com/attachments/1228736837946704045/1228889178310316074/Untitled-12png.png?ex=662daf3b&is=661b3a3b&hm=b644dfd593fe329ffcdce813c8567b4b5470aec1085fcd0f3503d0c25381d7ac&"
+              className=" rounded-3xl shadow-lg shadow-white/10"
+              src="https://cdn.discordapp.com/attachments/1228736837946704045/1229282309061214308/home-page-expl.png?ex=662f1d5d&is=661ca85d&hm=ae197e9b3251649d1f57afd112f9c15e618340e2e74c5b3d2960994c62e245ea&"
               alt="style ref home page"
+            />
+            <img
+              className=" rounded-3xl shadow-lg shadow-white/10"
+              src="https://cdn.discordapp.com/attachments/1228736837946704045/1229282310734479462/beta-page_explanation.png?ex=662f1d5d&is=661ca85d&hm=eb9211f13f6bfd085f8703fea4702a0d098bafd96be86679cfa57b9a7bf408be&"
+              alt="style ref beta page"
             />
           </div>
         </div>
