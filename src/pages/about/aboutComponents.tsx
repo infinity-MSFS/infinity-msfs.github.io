@@ -26,8 +26,8 @@ export const AboutComponent = ({ title, icon, colors, dotSize = 2 }: AboutProps)
         animationSpeed={3}
         showGradient={false}
         containerClassName="bg-black"
-        colors={colors}
-        dotSize={dotSize}
+        colors={[colors[0].map((c) => c / 2)]}
+        dotSize={Math.max(2, dotSize)} // dotSize must be at least 2 other perf issues
       />
       <div className="absolute inset-0 [mask-image:radial-gradient(300px_at_center,transparent,white)] bg-black/50 dark:bg-black/90" />
     </Card>
