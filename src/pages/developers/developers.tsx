@@ -64,17 +64,17 @@ export const Developers = (): JSX.Element => {
           <div className=" w-full gap-3 flex flex-col items-center justify-center">
             <img
               className=" rounded-3xl shadow-lg shadow-white/10"
-              src="https://cdn.discordapp.com/attachments/1228736837946704045/1229282309908336690/projectspage-expl.png?ex=662f1d5d&is=661ca85d&hm=f824c8c04408c49aae907e05484c2bc8d714cfe1bbe87a2cc633ebcef81b397b&"
+              src="/projects-page.png"
               alt="style ref"
             />
             <img
               className=" rounded-3xl shadow-lg shadow-white/10"
-              src="https://cdn.discordapp.com/attachments/1228736837946704045/1229282309061214308/home-page-expl.png?ex=662f1d5d&is=661ca85d&hm=ae197e9b3251649d1f57afd112f9c15e618340e2e74c5b3d2960994c62e245ea&"
+              src="/home-page.png"
               alt="style ref home page"
             />
             <img
               className=" rounded-3xl shadow-lg shadow-white/10"
-              src="https://cdn.discordapp.com/attachments/1228736837946704045/1229282310734479462/beta-page_explanation.png?ex=662f1d5d&is=661ca85d&hm=eb9211f13f6bfd085f8703fea4702a0d098bafd96be86679cfa57b9a7bf408be&"
+              src="/beta-page.png"
               alt="style ref beta page"
             />
           </div>
