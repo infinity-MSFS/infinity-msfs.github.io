@@ -8,7 +8,7 @@ export const About = (): JSX.Element => {
       </div>
       <div className="flex pt-6 flex-row flex-wrap gap-y-8 items-center justify-center max-w-7xl">
         <AboutComponent title="Rust backend" colors={[[246, 76, 0]]} icon={<Icons type="rust" />} />
-        <AboutComponent title="React frontend" colors={[[97, 218, 251]]} icon={<Icons type="react" />} />
+        <AboutComponent title="Leptos frontend" colors={[[255, 20, 20]]} icon={<Icons type="leptos" />} />
         <AboutComponent title="Simconnect Built in" colors={[[130, 155, 185]]} icon={<Icons type="airplane" />} />
         <AboutComponent
           title="Automatically locate Community Folder"
