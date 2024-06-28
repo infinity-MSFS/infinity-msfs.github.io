@@ -22,16 +22,17 @@ export const Developers = (): JSX.Element => {
       <div className="py-4 px-5 w-11/12 border shadow-glow-2xl shadow-white/20 rounded-md my-2 overflow-x-auto">
         <div className="text-2xl font-bold">Group Manager</div>
         <div className="pb-10">
-          The group management is done via a desktop application to ensure consistency in the output, the latest build
-          of said app can be found{' '}
-          <a className=" text-blue-400" href="https://github.com/infinity-MSFS/group-manager/releases/tag/v1.0.2">
+          Group management is facilitated through a dedicated desktop application to ensure consistent output quality.
+          You can find the latest build of the application
+          <a className="text-blue-400" href="https://github.com/infinity-MSFS/group-manager/releases/tag/v1.0.2">
             here
           </a>
+          .
         </div>
         <div>
-          Here is a short video which discusses how to the group manager. As you can see communication is required for
-          us to approve you PR for assets and group info, thus please join our{' '}
-          <a className=" text-blue-400" href="https://discord.gg/mJ3BUgyTAQ">
+          Watch this brief video tutorial on using the group manager. Effective communication is essential for us to
+          review your pull requests for assets and group information, so please join our
+          <a className="text-blue-400" href="https://discord.gg/mJ3BUgyTAQ">
             Discord
           </a>
           .
