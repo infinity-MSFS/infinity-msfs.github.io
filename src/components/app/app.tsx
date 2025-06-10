@@ -5,6 +5,7 @@ import { Navbar } from '../navbar/navbar'
 import { Developers } from '../../pages/developers/developers'
 import { useEffect } from 'react'
 import { BackgroundGradientAnimation } from '../aceternity/gradientAnimation'
+import { Aircraft } from '../../pages/aircraft/aircraft'
 
 export const App = (): JSX.Element => {
   const loc = useLocation()
@@ -26,6 +27,7 @@ export const App = (): JSX.Element => {
               opacity={90}
               buttons={[
                 { string: 'Home', to: '/' },
+                { string: 'Aircraft', to: '/aircraft' },
                 { string: 'About', to: '/about' },
                 { string: 'Developers', to: '/developer' }
               ]}
@@ -35,6 +37,7 @@ export const App = (): JSX.Element => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/developer" element={<Developers />} />
+            <Route path="/aircraft" element={<Aircraft />} />
           </Routes>
         </div>
       </BackgroundGradientAnimation>

@@ -36,6 +36,7 @@ export const Home = (): JSX.Element => {
           opacity={40}
           buttons={[
             { string: 'Home', to: '/' },
+            { string: 'Aircraft', to: '/aircraft' },
             { string: 'About', to: '/about' },
             { string: 'Developers', to: '/developer' }
           ]}
