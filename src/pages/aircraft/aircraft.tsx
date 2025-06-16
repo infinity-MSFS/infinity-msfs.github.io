@@ -1,251 +1,194 @@
 import React, { useState } from 'react'
-import { X, ChevronLeft, ChevronRight, ShoppingCart, Star } from 'lucide-react'
+import { ShoppingCart, Download, Users, Star, MessageCircle, FileText, Plane } from 'lucide-react'
 
-type T_Aircraft = {
-  id: number
-  name: string
-  price: string
-  rating: number
-  reviews: number
-  description: string
-  features: string[]
-  images: string[]
-  thumbnail: string
-}
+export const T38ProductPage = () => {
+  const [selectedImage, setSelectedImage] = useState(0)
 
-const aircraftData: T_Aircraft[] = [
-  {
-    id: 1,
-    name: 'Northrop T-38C Talon',
-    price: '$38.99',
-    rating: 4.8,
-    reviews: 156,
-    description: 'The Northrop T-38C Talon is a twin-engine, high-altitude, supersonic jet trainer aircraft.',
-    features: ['Realistic flight dynamics', 'Custom sound package', 'Detailed cockpit', 'Multiple liveries'],
-    images: [
-    
-      'https://i.gyazo.com/221b3ba316dc5fa55533b84126436136.png',
-      'https://i.gyazo.com/a4228b64e99c48a60768b74a3c870191.png',
-      'https://i.gyazo.com/0081cf97f39b9d05ca602dbb3fdda522.png',
-      'https://i.gyazo.com/ae128a49920630cac7176318d0e9f0cc.png',
-'https://i.gyazo.com/651e3bab6fcd20528bee796d1cd6873c.png',
-'https://i.gyazo.com/e45854387a59dfaf3175689ef54613d7.png',
-'https://i.gyazo.com/043f0ddd54ed70941abb0f5765f21866.png',
-'https://i.gyazo.com/6976c28fd92bb800d9a9d73d60bfcbb2.png',
-'https://i.gyazo.com/a5b00903da8d0138c35727753229681e.png'
-    ],
-    thumbnail:
-     'https://i.gyazo.com/547d29151342182bf80397623e52f79e.png'
-  }
-]
+  const images = [
+    'https://i.gyazo.com/547d29151342182bf80397623e52f79e.png',
+    'https://i.gyazo.com/221b3ba316dc5fa55533b84126436136.png',
+    'https://i.gyazo.com/a4228b64e99c48a60768b74a3c870191.png',
+    'https://i.gyazo.com/0081cf97f39b9d05ca602dbb3fdda522.png',
+    'https://i.gyazo.com/ae128a49920630cac7176318d0e9f0cc.png',
+    'https://i.gyazo.com/651e3bab6fcd20528bee796d1cd6873c.png',
+    'https://i.gyazo.com/e45854387a59dfaf3175689ef54613d7.png',
+    'https://i.gyazo.com/043f0ddd54ed70941abb0f5765f21866.png',
+    'https://i.gyazo.com/6976c28fd92bb800d9a9d73d60bfcbb2.png',
+    'https://i.gyazo.com/a5b00903da8d0138c35727753229681e.png'
+  ]
 
-export const Aircraft = (): JSX.Element => {
-  const [selectedAircraft, setSelectedAircraft] = useState<T_Aircraft | null>(null)
-  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0)
+  const features = [
+    'Realistic Flight Model with supersonic performance',
+    'High-Fidelity Visuals with PBR textures',
+    'Custom Avionics Suite with glass cockpit',
+    'Immersive Sound Design with Wwise audio',
+    'Fully Functional Systems simulation',
+    'Aerobatic & Training Modes',
+    '10+ Authentic Liveries',
+    'Electronic Flight Bag (EFB)',
+    'Pilot Kneeboard with ground crew',
+    'Interactive Ground Crew',
+    'Custom Effects and wingflex',
+    'MSFS 2024 Ready'
+  ]
 
-  const openModal = (aircraft: T_Aircraft): void => {
-    setSelectedAircraft(aircraft)
-    setCurrentImageIndex(0)
-  }
-
-  const closeModal = (): void => {
-    setSelectedAircraft(null)
-    setCurrentImageIndex(0)
-  }
-
-  const nextImage = (): void => {
-    if (selectedAircraft != null && selectedAircraft.images.length > 0) {
-      setCurrentImageIndex((prev) => (prev === selectedAircraft.images.length - 1 ? 0 : prev + 1))
-    }
-  }
-
-  const prevImage = (): void => {
-    if (selectedAircraft != null && selectedAircraft.images.length > 0) {
-      setCurrentImageIndex((prev) => (prev === 0 ? selectedAircraft.images.length - 1 : prev - 1))
-    }
-  }
-
-  const handlePurchase = (aircraft: T_Aircraft): void => {
-    // Replace with your third-party payment integration
-    console.log(`Purchasing ${aircraft.name} for ${aircraft.price}`)
-    // Example: window.open(`https://your-payment-provider.com/checkout?item=${aircraft.id}`, '_blank');
-    alert(`Redirecting to payment for ${aircraft.name} - ${aircraft.price}`)
-  }
+  const specs = [
+    { label: 'Range', value: '1,140 nm' },
+    { label: 'Max Speed', value: 'Mach 1.3' },
+    { label: 'Stall Speed', value: '160 kt' },
+    { label: 'Climb Rate', value: '33,600 ft/min' },
+    { label: 'Service Ceiling', value: '50,000 ft' },
+    { label: 'Length', value: '46 ft 8 in' },
+    { label: 'Wingspan', value: '25 ft 3 in' },
+    { label: 'Max Takeoff Weight', value: '12,000 lb' }
+  ]
 
   return (
-    <div className="pt-8 flex flex-col items-center justify-center min-h-screen bg-transparent">
-      <div style={{ textShadow: 'white 1px 0 70px' }} className="text-4xl text-center font-bold my-8">
-        Our Aircraft Collection
-      </div>
+    <div className="min-h-screen text-white">
+      <div className="max-w-7xl mx-auto px-8 py-12">
+        {/* Header Section */}
 
-      <div className="flex pt-6 flex-row flex-wrap gap-8 items-center justify-center max-w-7xl px-4">
-        {aircraftData.map((aircraft) => (
-          <div
-            key={aircraft.id}
-            className="bg-black rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer overflow-hidden max-w-sm"
-            onClick={() => {
-              openModal(aircraft)
-            }}
-          >
-            <div className="relative">
-              <img src={aircraft.thumbnail} alt={aircraft.name} className="w-full h-48 object-cover" />
-              <div className="absolute top-2 right-2 bg-black bg-opacity-90 rounded-full px-2 py-1 text-sm font-semibold text-slate-200">
-                {aircraft.price}
-              </div>
+        {/* Product Section */}
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Left Column - Product Images */}
+          <div className="space-y-4">
+            <div className="aspect-video bg-white/5 rounded-xl overflow-hidden border border-white/10">
+              <img src={images[selectedImage]} alt="T-38C Talon" className="w-full h-full object-cover" />
             </div>
-
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-slate-200 mb-2">{aircraft.name}</h3>
-
-              <div className="flex items-center mb-3">
-                <div className="flex items-center">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${
-                        i < Math.floor(aircraft.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                      }`}
-                    />
-                  ))}
-                </div>
-                <span className="ml-2 text-sm text-slate-200">
-                  {aircraft.rating} ({aircraft.reviews} reviews)
-                </span>
-              </div>
-
-              <p className="text-slate-200 text-sm mb-4 line-clamp-2">{aircraft.description}</p>
-
-              <button
-                type="button"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
-                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                  e.stopPropagation()
-                  openModal(aircraft)
-                }}
-              >
-                View Details
-              </button>
+            <div className="grid grid-cols-4 gap-2">
+              {images.map((img, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedImage(index)}
+                  className={`aspect-video rounded-lg overflow-hidden border-2 transition-all ${
+                    selectedImage === index ? 'border-blue-400' : 'border-white/20 hover:border-white/40'
+                  }`}
+                >
+                  <img src={img} alt={`T-38C ${index + 1}`} className="w-full h-full object-cover" />
+                </button>
+              ))}
             </div>
           </div>
-        ))}
-      </div>
 
-      {/* Modal Overlay */}
-      {selectedAircraft != null && (
-        <div className="fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center z-50 p-4">
-          <div className="bg-black rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            {/* Modal Header */}
-            <div className="flex justify-between items-center p-6 border-b">
-              <h2 className="text-2xl font-bold text-slate-200">{selectedAircraft.name}</h2>
-              <button
-                type="button"
-                onClick={closeModal}
-                className="text-slate-200 hover:text-gray-700 transition-colors"
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
+          {/* Right Column - Product Details */}
+          <div className="space-y-8">
+            <div>
+              <h1 className="text-4xl font-bold mb-2">T-38C Talon</h1>
+              <p className="text-lg text-blue-300 mb-4">for Microsoft Flight Simulator 2024</p>
+              <p className="text-sm text-yellow-300 mb-6">
+                *Purchase includes aircraft for Microsoft Flight Simulator 2024 version only.*
+              </p>
 
-            {/* Image Gallery */}
-            <div className="relative">
-              {selectedAircraft.images[currentImageIndex] && (
-                <img
-                  src={selectedAircraft.images[currentImageIndex]}
-                  alt={`${selectedAircraft.name} - Image ${currentImageIndex + 1}`}
-                  className="w-full h-64 md:h-96 object-cover"
-                />
-              )}
-
-              {selectedAircraft.images.length > 1 && (
-                <>
-                  <button
-                    type="button"
-                    onClick={prevImage}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all"
-                  >
-                    <ChevronLeft className="w-6 h-6" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={nextImage}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all"
-                  >
-                    <ChevronRight className="w-6 h-6" />
-                  </button>
-
-                  {/* Image indicators */}
-                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-                    {selectedAircraft.images.map((_, index) => (
-                      <button
-                        type="button"
-                        key={index}
-                        onClick={() => setCurrentImageIndex(index)}
-                        className={`w-2 h-2 rounded-full transition-all ${
-                          index === currentImageIndex ? 'bg-white' : 'bg-white bg-opacity-50'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-
-            {/* Modal Content */}
-            <div className="p-6">
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="flex-1">
-                  <div className="flex items-center mb-4">
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`w-5 h-5 ${
-                            i < Math.floor(selectedAircraft.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <span className="ml-2 text-slate-200">
-                      {selectedAircraft.rating} ({selectedAircraft.reviews} reviews)
-                    </span>
-                  </div>
-
-                  <h3 className="text-lg font-semibold mb-3 text-slate-400">Description</h3>
-                  <p className="text-slate-200 mb-6 leading-relaxed">{selectedAircraft.description}</p>
-
-                  <h3 className="text-lg font-semibold mb-3 text-slate-400">Key Features</h3>
-                  <ul className="text-slate-200 space-y-2">
-                    {selectedAircraft.features.map((feature, index) => (
-                      <li key={index} className="flex items-center">
-                        <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+              {/* <div className="flex items-center space-x-4 mb-6">
+                <div className="flex items-center space-x-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  ))}
                 </div>
+                <span className="text-white/60">(124 reviews)</span>
+              </div> */}
 
-                {/* Purchase Section */}
-                <div className="md:w-80">
-                  <div className="bg-gray-950 rounded-lg p-6 sticky top-4">
-                    <div className="text-3xl font-bold text-slate-400 mb-4">{selectedAircraft.price}</div>
+              <p className="text-white/90 leading-relaxed mb-8">
+                The T-38C Talon is the U.S. Air Force's premier supersonic jet trainer, renowned for its sleek design,
+                blistering speed, and critical role in preparing pilots for advanced fighters like the F-22 and F-35.
+                Experience this iconic aircraft in Microsoft Flight Simulator with unprecedented realism and immersion.
+              </p>
 
-                    <button
-                      type="button"
-                      onClick={() => handlePurchase(selectedAircraft)}
-                      className="w-full bg-green-400 hover:bg-green-300 text-black font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 mb-4"
-                    >
-                      <ShoppingCart className="w-5 h-5" />
-                      Buy Now
-                    </button>
+              <div className="flex items-center space-x-4 mb-8">
+                <div className="text-3xl font-bold text-green-400">$38.99</div>
+              </div>
 
-                    <div className="text-sm text-slate-200 text-center">Secure payment via third-party processor</div>
-                  </div>
+              <div className="flex space-x-4 mb-8">
+                <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2">
+                  <ShoppingCart className="w-5 h-5" />
+                  <span>Purchase</span>
+                </button>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4 text-center py-6 border-y border-white/10">
+                <div>
+                  <Download className="w-6 h-6 mx-auto mb-2 text-blue-400" />
+                  <div className="text-sm text-white/60">Instant Download</div>
+                </div>
+                <div>
+                  <Users className="w-6 h-6 mx-auto mb-2 text-green-400" />
+                  <div className="text-sm text-white/60">Discord Support</div>
+                </div>
+                <div>
+                  <FileText className="w-6 h-6 mx-auto mb-2 text-purple-400" />
+                  <div className="text-sm text-white/60">Full Manual</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      )}
+
+        {/* Features Section */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-bold mb-8 text-center">Features</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className="bg-white/5 rounded-lg p-4 border border-white/10 hover:bg-white/10 transition-colors"
+              >
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-white/90">{feature}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Specifications */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-bold mb-8 text-center">Performance Specifications</h2>
+          <div className="bg-white/5 rounded-xl p-8 border border-white/10">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {specs.map((spec, index) => (
+                <div key={index} className="text-center">
+                  <div className="text-2xl font-bold text-blue-400 mb-1">{spec.value}</div>
+                  <div className="text-white/60 text-sm">{spec.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Support Section */}
+        <div className="mt-16 bg-white/5 rounded-xl p-8 border border-white/10">
+          <h2 className="text-2xl font-bold mb-6 text-center">Support & Community</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="text-center">
+              <MessageCircle className="w-12 h-12 mx-auto mb-4 text-blue-400" />
+              <h3 className="text-xl font-semibold mb-2">Discord Server</h3>
+              <p className="text-white/60 mb-4">Join our community for support, updates, and discussions</p>
+              <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition-colors">
+                Join Discord
+              </button>
+            </div>
+            <div className="text-center">
+              <FileText className="w-12 h-12 mx-auto mb-4 text-green-400" />
+              <h3 className="text-xl font-semibold mb-2">Flight Manual</h3>
+              <p className="text-white/60 mb-4">Comprehensive documentation and procedures guide</p>
+              <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition-colors">
+                Download Manual
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Note */}
+        <div className="mt-12 text-center text-white/60">
+          <p className="mb-2">
+            Developed with feedback from T-38C pilots and MSFS community input to ensure authenticity.
+          </p>
+          <p>Take command of the T-38C Talon and experience the ultimate jet trainer in Microsoft Flight Simulator!</p>
+        </div>
+      </div>
     </div>
   )
 }
+
+export default T38ProductPage

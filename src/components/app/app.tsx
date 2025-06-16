@@ -5,7 +5,7 @@ import { Navbar } from '../navbar/navbar'
 import { Developers } from '../../pages/developers/developers'
 import { useEffect } from 'react'
 import { BackgroundGradientAnimation } from '../aceternity/gradientAnimation'
-import { Aircraft } from '../../pages/aircraft/aircraft'
+import { T38ProductPage } from '../../pages/aircraft/aircraft'
 
 export const App = (): JSX.Element => {
   const loc = useLocation()
@@ -37,7 +37,7 @@ export const App = (): JSX.Element => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/developer" element={<Developers />} />
-            <Route path="/aircraft" element={<Aircraft />} />
+            <Route path="/aircraft" element={<T38ProductPage />} />
           </Routes>
         </div>
       </BackgroundGradientAnimation>
