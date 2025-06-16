@@ -28,7 +28,7 @@ export const App = (): JSX.Element => {
               buttons={[
                 { string: 'Home', to: '/' },
                 { string: 'Aircraft', to: '/aircraft' },
-                { string: 'About', to: '/about' },
+                { string: 'Launcher', to: '/about' },
                 { string: 'Developers', to: '/developer' }
               ]}
             />
