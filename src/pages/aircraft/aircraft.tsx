@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { ShoppingCart, Download, Users, Star, MessageCircle, FileText, Plane } from 'lucide-react'
+import { useState } from 'react'
+import { ShoppingCart, Download, Users, MessageCircle, FileText } from 'lucide-react'
 
-export const T38ProductPage = () => {
+export const T38ProductPage = (): JSX.Element => {
   const [selectedImage, setSelectedImage] = useState(0)
 
   const images = [
@@ -59,7 +59,9 @@ export const T38ProductPage = () => {
               {images.map((img, index) => (
                 <button
                   key={index}
-                  onClick={() => setSelectedImage(index)}
+                  onClick={() => {
+                    setSelectedImage(index)
+                  }}
                   className={`aspect-video rounded-lg overflow-hidden border-2 transition-all ${
                     selectedImage === index ? 'border-blue-400' : 'border-white/20 hover:border-white/40'
                   }`}
@@ -89,9 +91,10 @@ export const T38ProductPage = () => {
               </div> */}
 
               <p className="text-white/90 leading-relaxed mb-8">
-                The T-38C Talon is the U.S. Air Force's premier supersonic jet trainer, renowned for its sleek design,
-                blistering speed, and critical role in preparing pilots for advanced fighters like the F-22 and F-35.
-                Experience this iconic aircraft in Microsoft Flight Simulator with unprecedented realism and immersion.
+                The T-38C Talon is the U.S. Air Force&apos;s premier supersonic jet trainer, renowned for its sleek
+                design, blistering speed, and critical role in preparing pilots for advanced fighters like the F-22 and
+                F-35. Experience this iconic aircraft in Microsoft Flight Simulator with unprecedented realism and
+                immersion.
               </p>
 
               <div className="flex items-center space-x-4 mb-8">
