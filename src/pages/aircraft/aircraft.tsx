@@ -23,14 +23,19 @@ const aircraftData: T_Aircraft[] = [
     description: 'The Northrop T-38C Talon is a twin-engine, high-altitude, supersonic jet trainer aircraft.',
     features: ['Realistic flight dynamics', 'Custom sound package', 'Detailed cockpit', 'Multiple liveries'],
     images: [
-      'https://cdn.discordapp.com/attachments/890479608078671873/1382133425309352027/3813.PNG?ex=684a0b8f&is=6848ba0f&hm=fe2b920a170ed7e21409d02a64d9cfb14b455cbd77066d6f96294bcabd8cfcc5&',
-      'https://cdn.discordapp.com/attachments/890479608078671873/1382133426949197925/3817.PNG?ex=684a0b8f&is=6848ba0f&hm=3ffa48b28e8a68eb122d711ef9b5ec3c1fc1874995e659277ed74d327210f0ee&',
-      'https://cdn.discordapp.com/attachments/890479608078671873/1382133429600256120/3814.PNG?ex=684a0b90&is=6848ba10&hm=11e438b73d1c2918313c5dc02a4a7888f9729821f59333e495896d62e5cb851d&',
-      'https://cdn.discordapp.com/attachments/890479608078671873/1382133431076388895/3812.PNG?ex=684a0b90&is=6848ba10&hm=fa6240a24e9baf6d15afe8ad416536e337033febce5f0cfcec0b14d6f9c9bd8c&',
-      'https://cdn.discordapp.com/attachments/890479608078671873/1382133432469028895/3811.PNG?ex=684a0b91&is=6848ba11&hm=b81ae5a29d6e876ca970875d8d0e27df31145f464664d6c80f34d932119f92&'
+    
+      'https://i.gyazo.com/221b3ba316dc5fa55533b84126436136.png',
+      'https://i.gyazo.com/a4228b64e99c48a60768b74a3c870191.png',
+      'https://i.gyazo.com/0081cf97f39b9d05ca602dbb3fdda522.png',
+      'https://i.gyazo.com/ae128a49920630cac7176318d0e9f0cc.png',
+'https://i.gyazo.com/651e3bab6fcd20528bee796d1cd6873c.png',
+'https://i.gyazo.com/e45854387a59dfaf3175689ef54613d7.png',
+'https://i.gyazo.com/043f0ddd54ed70941abb0f5765f21866.png',
+'https://i.gyazo.com/6976c28fd92bb800d9a9d73d60bfcbb2.png',
+'https://i.gyazo.com/a5b00903da8d0138c35727753229681e.png'
     ],
     thumbnail:
-      'https://media.discordapp.net/attachments/890479608078671873/1382133435589722292/384.PNG?ex=684a0b91&is=6848ba11&hm=2e269c7362489489ae65f3415bed8a0c6e1206a14dcec13c87de8718a94ec3bb&=&format=webp&quality=lossless&width=1515&height=852'
+     'https://i.gyazo.com/547d29151342182bf80397623e52f79e.png'
   }
 ]
 
