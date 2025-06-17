@@ -26,10 +26,10 @@ export const T38ProductPage = (): JSX.Element => {
     'Aerobatic & Training Modes',
     '10+ Authentic Liveries',
     'Electronic Flight Bag (EFB)',
-    'Pilot Kneeboard with ground crew',
-    'Interactive Ground Crew',
+    'Interactive Pilot Kneeboard',
+    'Commandable Ground Crew',
     'Custom Effects and wingflex',
-    'MSFS 2024 Ready'
+    '4 Selectable Configurations'
   ]
 
   const specs = [
