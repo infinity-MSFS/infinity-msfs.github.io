@@ -55,7 +55,7 @@ export const T38ProductPage = (): JSX.Element => {
   const handleMouseLeave = () => {
     hoverTimeoutRef.current = setTimeout(() => {
       setIsHovering(false)
-    }, 100)
+    }, 150)
   }
 
   return (
@@ -98,14 +98,12 @@ export const T38ProductPage = (): JSX.Element => {
           </div>
           {isHovering && (
             <div 
-              className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 transition-opacity duration-200"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+              className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 transition-opacity duration-200 pointer-events-none"
             >
               <img 
                 src={images[selectedImage]} 
                 alt="T-38C Talon Large" 
-                className="max-w-[95vw] max-h-[95vh] object-contain rounded-lg shadow-2xl pointer-events-none"
+                className="max-w-[95vw] max-h-[95vh] object-contain rounded-lg shadow-2xl"
               />
             </div>
           )}
@@ -114,7 +112,7 @@ export const T38ProductPage = (): JSX.Element => {
           <div className="space-y-8">
             <div>
               <h1 className="text-4xl font-bold mb-2">T-38C Talon</h1>
-              <p className="text-lg text-blue-300 mb-4">for Microsoft Flight Simulator 2024</p>
+              <p className="text-lg text-blue-300 mb-4">for Microsoft Flight Simulator</p>
               <p className="text-sm text-yellow-300 mb-6">
                 *Purchase includes aircraft for Microsoft Flight Simulator 2024 version only.*
               </p>
