@@ -1,10 +1,9 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { ShoppingCart, Download, Users, MessageCircle, FileText } from 'lucide-react'
 
 export const T38ProductPage = (): JSX.Element => {
   const [selectedImage, setSelectedImage] = useState(0)
   const [isHovering, setIsHovering] = useState(false)
-  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const images = [
     'https://i.gyazo.com/547d29151342182bf80397623e52f79e.png',
@@ -45,19 +44,6 @@ export const T38ProductPage = (): JSX.Element => {
     { label: 'Max Takeoff Weight', value: '12,000 lb' }
   ]
 
-  const handleMouseEnter = () => {
-    if (hoverTimeoutRef.current) {
-      clearTimeout(hoverTimeoutRef.current)
-    }
-    setIsHovering(true)
-  }
-
-  const handleMouseLeave = () => {
-    hoverTimeoutRef.current = setTimeout(() => {
-      setIsHovering(false)
-    }, 150)
-  }
-
   return (
     <div className="min-h-screen text-white">
       <div className="max-w-7xl mx-auto px-8 py-12">
@@ -67,18 +53,16 @@ export const T38ProductPage = (): JSX.Element => {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Left Column - Product Images */}
           <div className="space-y-4">
-            <div className="aspect-video bg-white/5 rounded-xl overflow-hidden border border-white/10">
-              <div 
-                className="w-full h-full"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                <img 
-                  src={images[selectedImage]} 
-                  alt="T-38C Talon" 
-                  className="w-full h-full object-cover" 
-                />
-              </div>
+            <div 
+              className="aspect-video bg-white/5 rounded-xl overflow-hidden border border-white/10 relative"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              <img 
+                src={images[selectedImage]} 
+                alt="T-38C Talon" 
+                className="w-full h-full object-cover" 
+              />
             </div>
             <div className="grid grid-cols-4 gap-2">
               {images.map((img, index) => (
@@ -97,9 +81,7 @@ export const T38ProductPage = (): JSX.Element => {
             </div>
           </div>
           {isHovering && (
-            <div 
-              className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 transition-opacity duration-200 pointer-events-none"
-            >
+            <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 transition-opacity duration-200 pointer-events-none">
               <img 
                 src={images[selectedImage]} 
                 alt="T-38C Talon Large" 
@@ -112,7 +94,7 @@ export const T38ProductPage = (): JSX.Element => {
           <div className="space-y-8">
             <div>
               <h1 className="text-4xl font-bold mb-2">T-38C Talon</h1>
-              <p className="text-lg text-blue-300 mb-4">for Microsoft Flight Simulator</p>
+              <p className="text-lg text-blue-300 mb-4">for Microsoft Flight Simulator 2024</p>
               <p className="text-sm text-yellow-300 mb-6">
                 *Purchase includes aircraft for Microsoft Flight Simulator 2024 version only.*
               </p>
