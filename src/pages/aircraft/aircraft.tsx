@@ -3,6 +3,7 @@ import { ShoppingCart, Download, Users, MessageCircle, FileText } from 'lucide-r
 
 export const T38ProductPage = (): JSX.Element => {
   const [selectedImage, setSelectedImage] = useState(0)
+  const [isHovering, setIsHovering] = useState(false)
 
   const images = [
     'https://i.gyazo.com/547d29151342182bf80397623e52f79e.png',
@@ -52,8 +53,25 @@ export const T38ProductPage = (): JSX.Element => {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Left Column - Product Images */}
           <div className="space-y-4">
-            <div className="aspect-video bg-white/5 rounded-xl overflow-hidden border border-white/10">
-              <img src={images[selectedImage]} alt="T-38C Talon" className="w-full h-full object-cover" />
+            <div 
+              className="aspect-video bg-white/5 rounded-xl overflow-hidden border border-white/10 relative"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              <img 
+                src={images[selectedImage]} 
+                alt="T-38C Talon" 
+                className="w-full h-full object-cover" 
+              />
+              {isHovering && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
+                  <img 
+                    src={images[selectedImage]} 
+                    alt="T-38C Talon Large" 
+                    className="max-w-[90%] max-h-[90%] object-contain rounded-lg shadow-2xl"
+                  />
+                </div>
+              )}
             </div>
             <div className="grid grid-cols-4 gap-2">
               {images.map((img, index) => (
@@ -81,17 +99,8 @@ export const T38ProductPage = (): JSX.Element => {
                 *Purchase includes aircraft for Microsoft Flight Simulator 2024 version only.*
               </p>
 
-              {/* <div className="flex items-center space-x-4 mb-6">
-                <div className="flex items-center space-x-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <span className="text-white/60">(124 reviews)</span>
-              </div> */}
-
               <p className="text-white/90 leading-relaxed mb-8">
-                The T-38C Talon is the U.S. Air Force&apos;s premier supersonic jet trainer, renowned for its sleek
+                The T-38C Talon is the U.S. Air Force's premier supersonic jet trainer, renowned for its sleek
                 design, blistering speed, and critical role in preparing pilots for advanced fighters like the F-22 and
                 F-35. Experience this iconic aircraft in Microsoft Flight Simulator with unprecedented realism and
                 immersion.
