@@ -94,7 +94,7 @@ export const T38ProductPage = (): JSX.Element => {
           <div className="space-y-8">
             <div>
               <h1 className="text-4xl font-bold mb-2">T-38C Talon</h1>
-              <p className="text-lg text-blue-300 mb-4">for Microsoft Flight Simulator 2024</p>
+              <p className="text-lg text-blue-300 mb-4">for Microsoft Flight Simulator</p>
               <p className="text-sm text-yellow-300 mb-6">
                 *Purchase includes aircraft for Microsoft Flight Simulator 2024 version only.*
               </p>
@@ -176,9 +176,14 @@ export const T38ProductPage = (): JSX.Element => {
               <MessageCircle className="w-12 h-12 mx-auto mb-4 text-blue-400" />
               <h3 className="text-xl font-semibold mb-2">Discord Server</h3>
               <p className="text-white/60 mb-4">Join our community for support, updates, and discussions</p>
-              <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition-colors">
+              <a 
+                href="https://discord.gg/9kVXgjccXa" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition-colors"
+              >
                 Join Discord
-              </button>
+              </a>
             </div>
             <div className="text-center">
               <FileText className="w-12 h-12 mx-auto mb-4 text-green-400" />
