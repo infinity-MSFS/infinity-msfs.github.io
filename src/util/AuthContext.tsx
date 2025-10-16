@@ -60,13 +60,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 					try {
 						const result = await client.handleRedirectCallback();
 						console.log("Callback handled successfully:", result);
-						
+
 						// Clear the URL params but keep the hash
 						const hash = window.location.hash;
 						window.history.replaceState(
 							{},
 							document.title,
-							window.location.pathname + hash
+							window.location.pathname + hash,
 						);
 					} catch (error) {
 						console.error("Error handling callback:", error);
