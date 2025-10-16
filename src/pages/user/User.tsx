@@ -9,7 +9,7 @@ interface ProductData {
 }
 
 export const UserDashboard = (): JSX.Element => {
-  const { user, isAuthenticated, isLoading } = useAuth()
+  const { user, isAuthenticated, isLoading, getAccessToken } = useAuth()
   const [productData, setProductData] = useState<ProductData | null>(null)
   const [fetchLoading, setFetchLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -24,16 +24,14 @@ export const UserDashboard = (): JSX.Element => {
       }
 
       try {
-        // This would call your backend API to get user's product keys
-        // For now, we'll check Auth0 app_metadata if it's available
-        // In production, create a backend endpoint to fetch this securely
-        
-        const response = await fetch('/api/user-products', {
+        const access_token = await getAccessToken();
+
+        const response = await fetch('https://userbackend-polished-morning-9484.fly.dev/api/user/products', {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+            'Authorization': `Bearer ${access_token}`
           }
         })
-        
+
         if (response.ok) {
           const data = await response.json()
           setProductData(data)
@@ -80,12 +78,12 @@ export const UserDashboard = (): JSX.Element => {
         {/* User Profile Section */}
         <div className="bg-white/5 border border-white/10 rounded-xl p-8 mb-8">
           <h1 className="text-3xl font-bold mb-6">Account Dashboard</h1>
-          
+
           <div className="flex items-center gap-4 mb-6">
             {user?.picture && (
-              <img 
-                src={user.picture} 
-                alt={user.name || 'User'} 
+              <img
+                src={user.picture}
+                alt={user.name || 'User'}
                 className="w-16 h-16 rounded-full"
               />
             )}
@@ -147,7 +145,7 @@ export const UserDashboard = (): JSX.Element => {
                       {productData.product_key}
                     </code>
                   </div>
-                  
+
                   {productData.purchased_at && (
                     <div className="flex items-center gap-2 text-sm">
                       <Calendar className="w-4 h-4 text-purple-400" />
@@ -164,9 +162,15 @@ export const UserDashboard = (): JSX.Element => {
                     <Download className="w-4 h-4" />
                     Download
                   </button>
+                   <button className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors text-sm">
+                    <Download className="w-4 h-4" />
+                    Download Data Cartridge companion
+                  </button>
                   <button className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors text-sm">
                     View Manual
                   </button>
+                 
+
                 </div>
               </div>
 
@@ -191,11 +195,11 @@ export const UserDashboard = (): JSX.Element => {
         <div className="mt-8 bg-white/5 border border-white/10 rounded-xl p-6">
           <h3 className="text-xl font-semibold mb-4">Need Help?</h3>
           <p className="text-white/60 mb-4">
-            If you have any issues with your purchase or need technical support, 
+            If you have any issues with your purchase or need technical support,
             please reach out to us on Discord or via email.
           </p>
           <div className="flex gap-4">
-            <a 
+            <a
               href="https://discord.gg/9kVXgjccXa"
               target="_blank"
               rel="noopener noreferrer"
@@ -203,7 +207,7 @@ export const UserDashboard = (): JSX.Element => {
             >
               Join Discord
             </a>
-            <a 
+            <a
               href="mailto:support@example.com"
               className="bg-white/10 hover:bg-white/20 text-white px-6 py-2 rounded-lg transition-colors text-sm"
             >

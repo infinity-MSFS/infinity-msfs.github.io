@@ -69,7 +69,6 @@ export const Navbar: FC<T_navbarProps> = (props: T_navbarProps): JSX.Element => 
       )
     }
 
-    console.log(isAuthenticated, user)
     if (isAuthenticated && user) {
       return (
         <div className="flex items-center gap-3">
