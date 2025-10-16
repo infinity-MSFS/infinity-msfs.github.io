@@ -14,11 +14,6 @@ import PurchaseCancelled from '../../pages/purchaseCancelled/purchaseCancelled'
 export const App = (): JSX.Element => {
   const loc = useLocation()
 
-  useEffect(() => {
-    //@ts-ignore
-    window.createLemonSqueezy()
-  },[])
-
 
   useEffect(() => {
     if (location.hash === '#/') {
