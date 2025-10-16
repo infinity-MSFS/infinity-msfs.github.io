@@ -1,7 +1,9 @@
 import { useState, type FC, useRef, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import {LogIn, LogOut, User} from 'lucide-react'
 import useWindowDimensions from '../../hooks/useWindowDimensions'
 import Hamburger from 'hamburger-react'
+import { useAuth } from '../../util/AuthContext'
 
 type T_navbarProps = {
   buttons: T_navbarButtonProps[]
@@ -16,6 +18,7 @@ export const Navbar: FC<T_navbarProps> = (props: T_navbarProps): JSX.Element => 
   const nav = useNavigate()
   const loc = useLocation()
   const { width } = useWindowDimensions()
+  const {isAuthenticated, isLoading, loginWithRedirect, logout, user} = useAuth()
 
   const [hamburger, setHamburger] = useState<boolean>(false)
   const hamburgerMenuRef = useRef<HTMLDivElement>(null)
@@ -59,6 +62,43 @@ export const Navbar: FC<T_navbarProps> = (props: T_navbarProps): JSX.Element => 
     return buttons
   }
 
+  const getAuthButton = (): JSX.Element => {
+    if (isLoading) {
+      return (
+        <div className="text-sm text-white/60">Loading...</div>
+      )
+    }
+
+    console.log(isAuthenticated, user)
+    if (isAuthenticated && user) {
+      return (
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 text-sm" onClick={() => nav("/user")}>
+            <User className="w-4 h-4" />
+            <span className="hidden md:inline">{user.name || user.email}</span>
+          </div>
+          <button
+            onClick={logout}
+            className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-sm"
+          >
+            <LogOut className="w-4 h-4" />
+            <span>Logout</span>
+          </button>
+        </div>
+      )
+    }
+
+    return (
+      <button
+        onClick={loginWithRedirect}
+        className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors text-sm font-semibold"
+      >
+        <LogIn className="w-4 h-4" />
+        <span>Login</span>
+      </button>
+    )
+  }
+
   const getHamburger = (): JSX.Element => {
     return (
       <div ref={hamburgerButtonRef}>
@@ -87,9 +127,12 @@ export const Navbar: FC<T_navbarProps> = (props: T_navbarProps): JSX.Element => 
       <div
         ref={hamburgerMenuRef}
         style={{ backdropFilter: 'blur(30px)' }}
-        className="absolute top-20 bg-black/0 border-white border-b-2 w-screen flex items-center justify-center flex-col left-0"
+        className="absolute top-20 bg-black/80 border-white border-b-2 w-screen flex items-center justify-center flex-col left-0 py-4"
       >
         {buttons}
+        <div className="mt-4 w-full px-8">
+          {getAuthButton()}
+        </div>
       </div>
     )
   }
@@ -111,7 +154,7 @@ export const Navbar: FC<T_navbarProps> = (props: T_navbarProps): JSX.Element => 
         Infinity
       </div>
       <div className="flex flex-row items-center justify-center gap-9">
-        {width < 800 ? getHamburger() : getButtons()}
+        {width < 800 ? getHamburger() :<>{getButtons()} {getAuthButton()}</> }
       </div>
       {shouldShowHamburger && hamburgerMenu()}
     </div>

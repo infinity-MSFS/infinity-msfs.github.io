@@ -6,6 +6,8 @@ import { Developers } from '../../pages/developers/developers'
 import { useEffect } from 'react'
 import { BackgroundGradientAnimation } from '../aceternity/gradientAnimation'
 import { T38ProductPage } from '../../pages/aircraft/aircraft'
+import { AuthProvider } from '../../util/AuthContext'
+import { UserDashboard } from '../../pages/user/User'
 
 export const App = (): JSX.Element => {
   const loc = useLocation()
@@ -20,6 +22,7 @@ export const App = (): JSX.Element => {
 
   return (
     <>
+    <AuthProvider>
       <BackgroundGradientAnimation interactive={false}>
         <div className="h-screen w-screen dark:bg-black/90  dark:bg-dot-white/[0.2] overflow-y-auto bg-dot-black/[0.2] relative ">
           {location.hash !== '#/' && (
@@ -29,7 +32,7 @@ export const App = (): JSX.Element => {
                 { string: 'Home', to: '/' },
                 { string: 'Aircraft', to: '/aircraft' },
                 { string: 'Launcher', to: '/about' },
-                { string: 'Developers', to: '/developer' }
+                { string: 'Developers', to: '/developer' },
               ]}
             />
           )}
@@ -38,9 +41,12 @@ export const App = (): JSX.Element => {
             <Route path="/about" element={<About />} />
             <Route path="/developer" element={<Developers />} />
             <Route path="/aircraft" element={<T38ProductPage />} />
+            <Route path="/user" element={<UserDashboard />} />
           </Routes>
         </div>
+        
       </BackgroundGradientAnimation>
+      </AuthProvider>
     </>
   )
 }
