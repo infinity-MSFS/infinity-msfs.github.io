@@ -24,7 +24,7 @@ export const App = (): JSX.Element => {
     <>
     <AuthProvider>
       <BackgroundGradientAnimation interactive={false}>
-        <div className="h-screen w-screen dark:bg-black/90  dark:bg-dot-white/[0.2] overflow-y-auto bg-dot-black/[0.2] relative ">
+        <div className="h-screen w-screen dark:bg-black/90  dark:bg-dot-white/[0.2] overflow-y-auto overflow-x-hidden bg-dot-black/[0.2] relative ">
           {location.hash !== '#/' && (
             <Navbar
               opacity={90}
