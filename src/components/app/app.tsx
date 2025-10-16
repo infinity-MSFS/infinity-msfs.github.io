@@ -8,9 +8,17 @@ import { BackgroundGradientAnimation } from '../aceternity/gradientAnimation'
 import { T38ProductPage } from '../../pages/aircraft/aircraft'
 import { AuthProvider } from '../../util/AuthContext'
 import { UserDashboard } from '../../pages/user/User'
+import PurchaseSuccess from '../../pages/purchaseSuccess/PurchaseSuccess'
+import PurchaseCancelled from '../../pages/purchaseCancelled/purchaseCancelled'
 
 export const App = (): JSX.Element => {
   const loc = useLocation()
+
+  useEffect(() => {
+    //@ts-ignore
+    window.createLemonSqueezy()
+  },[])
+
 
   useEffect(() => {
     if (location.hash === '#/') {
@@ -42,6 +50,8 @@ export const App = (): JSX.Element => {
             <Route path="/developer" element={<Developers />} />
             <Route path="/aircraft" element={<T38ProductPage />} />
             <Route path="/user" element={<UserDashboard />} />
+            <Route path="/purchase-success" element={<PurchaseSuccess/>}/>
+            <Route path="/purchase-cancelled" element={<PurchaseCancelled/>}/>
           </Routes>
         </div>
         

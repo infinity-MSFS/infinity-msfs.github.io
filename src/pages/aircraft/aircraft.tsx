@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import { ShoppingCart, Download, Users, MessageCircle, FileText } from 'lucide-react'
+import { useAuth } from '../../util/AuthContext'
 
 export const T38ProductPage = (): JSX.Element => {
   const [selectedImage, setSelectedImage] = useState(0)
   const [isHovering, setIsHovering] = useState(false)
+  const {user} = useAuth()
+  const user_id = user?.sub
 
   const images = [
     'https://i.gyazo.com/547d29151342182bf80397623e52f79e.png',
@@ -111,10 +114,12 @@ export const T38ProductPage = (): JSX.Element => {
               </div>
 
               <div className="flex space-x-4 mb-8">
+                <a href={`https://infinitymsfs.lemonsqueezy.com/buy/9f0bf9c5-fabd-47c6-bb75-4acf64f1130b?checkout[custom][auth0_user_id]=${user_id}`} target='_blank'>
                 <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2">
                   <ShoppingCart className="w-5 h-5" />
                   <span>Purchase</span>
                 </button>
+                </a> 
               </div>
 
               <div className="grid grid-cols-3 gap-4 text-center py-6 border-y border-white/10">
