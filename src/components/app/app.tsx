@@ -35,7 +35,6 @@ export const App = (): JSX.Element => {
                 { string: 'Home', to: '/' },
                 { string: 'Aircraft', to: '/aircraft' },
                 { string: 'Launcher', to: '/about' },
-                { string: 'Developers', to: '/developer' },
               ]}
             />
           )}
