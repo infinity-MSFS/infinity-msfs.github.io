@@ -110,7 +110,7 @@ export const T38ProductPage = (): JSX.Element => {
               </p>
 
               <div className="flex items-center space-x-4 mb-8">
-                <div className="text-3xl font-bold text-green-400">$38.99</div>
+                <div className="text-3xl font-bold text-green-400">$19.99</div>
               </div>
 
               <div className="flex space-x-4 mb-8">
