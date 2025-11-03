@@ -126,12 +126,12 @@ export const UserDashboard = (): JSX.Element => {
 								</p>
 								{/** biome-ignore lint/a11y/noStaticElementInteractions: needed */}
 								{/** biome-ignore lint/a11y/useKeyWithClickEvents: not needed*/}
-								<div
-									onClick={() => nav("/aircraft")}
-									className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
-								>
-									Browse Products
-								</div>
+								//  <div
+								//  	onClick={() => nav("/aircraft")}
+								//  	className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+								//  >
+								//  	Browse Products
+								//  </div>
 							</div>
 						) : (
 							<div className="space-y-4">
