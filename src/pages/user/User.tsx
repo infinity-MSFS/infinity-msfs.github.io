@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from "../../util/AuthContext"
 import { Download, Key, Calendar, AlertCircle } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+//import { useNavigate } from 'react-router-dom'
 
 interface ProductData {
-  product_key: string
-  purchased_at: string
+	product_key: string;
+	purchased_at: string;
 }
 
 export const UserDashboard = (): JSX.Element => {
@@ -14,9 +14,9 @@ export const UserDashboard = (): JSX.Element => {
   const [fetchLoading, setFetchLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const nav = useNavigate()
+ // const nav = useNavigate()
 
-  useEffect(() => {
+		useEffect(() => {
 			const fetchProductKey = async () => {
 				if (!isAuthenticated || !user) {
 					setFetchLoading(false);
