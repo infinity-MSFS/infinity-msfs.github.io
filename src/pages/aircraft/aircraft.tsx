@@ -53,7 +53,7 @@ export const T38ProductPage = (): JSX.Element => {
 		"Interactive Pilot Kneeboard",
 		"Commandable Ground Crew",
 		"Custom Effects and wingflex",
-		"4 Selectable Configurations",
+		"Multiple Selectable Configurations",
 	];
 
 	const specs = [
@@ -303,7 +303,7 @@ export const T38ProductPage = (): JSX.Element => {
 						<div>
 							<h1 className="text-4xl font-bold mb-2">T-38 Talon Professional</h1>
 							<p className="text-lg text-blue-300 mb-4">
-								for Microsoft Flight Simulator
+								by Aero Dynamics Development
 							</p>
 							<p className="text-sm text-yellow-300 mb-6">
 								*Purchase includes aircraft for Microsoft Flight Simulator 2024
@@ -316,6 +316,10 @@ export const T38ProductPage = (): JSX.Element => {
 								critical role in preparing pilots for advanced fighters like the
 								F-22 and F-35. Experience this iconic aircraft in Microsoft
 								Flight Simulator with unprecedented realism and immersion.
+							</p>
+
+							<p className="text-white/90 leading-relaxed mb-8">
+                                The T-38 Talon Professional for Microsoft Flight Simulator 2024 features a highly detailed 3D model for both the T-38A and the Modern T-38C. This package include a beautiful hand-crafted aircraft with authentic flight dynamics, and a functional virtual cockpit. Whether you're a student pilot mastering the basics or an experienced aviator seeking high-speed thrills, this add-on delivers an unparalleled training experience.
 							</p>
 
 							<div className="flex items-center space-x-4 mb-8">
@@ -448,12 +452,13 @@ export const T38ProductPage = (): JSX.Element => {
 				{/* Footer Note */}
 				<div className="mt-12 text-center text-white/60">
 					<p className="mb-2">
-						Developed with feedback from T-38 pilots and MSFS community input
-						to ensure authenticity.
+						Developed with feedback from T-38 pilots and MSFS community input to ensure authenticity.
 					</p>
-					<p>
-						Take command of the T-38 Talon and experience the ultimate jet
-						trainer in Microsoft Flight Simulator!
+					<p className="mb-2">
+						Take command of the T-38 Talon and experience the ultimate jet trainer in Microsoft Flight Simulator!
+					</p>
+					<p className="mb-2">
+						Developed by Aero Dynamics Development LLC in collaboration with Infinity Simulations.
 					</p>
 				</div>
 			</div>
