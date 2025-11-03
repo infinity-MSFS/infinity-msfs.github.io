@@ -32,7 +32,7 @@ export const App = (): JSX.Element => {
 								opacity={90}
 								buttons={[
 									{ string: "Home", to: "/" },
-									{ string: "Aircraft", to: "/aircraft" },
+									//{ string: "Aircraft", to: "/aircraft" },
 									{ string: "Launcher", to: "/about" },
 								]}
 							/>

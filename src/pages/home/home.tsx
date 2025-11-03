@@ -3,7 +3,7 @@ import { Navbar } from "../../components/navbar/navbar";
 
 const name: string = "Infinity";
 const greeting =
-	"Infinity is the ultimate aircraft package installer and launcher for Microsoft Flight Simulator, now also home to high-quality aircraft addons. From seamless installs to premium aircraft like our new T-38C mod for FS2024, Infinity is built for both developers and flight sim enthusiasts.";
+	"Infinity is the ultimate aircraft package installer and launcher for Microsoft Flight Simulator, now also home to high-quality aircraft addons. From seamless installs to premium aircraft like our new T-38 mod for FS2024, Infinity is built for both developers and flight sim enthusiasts.";
 
 const InfinityLogo = (): JSX.Element => {
 	return (
@@ -39,7 +39,7 @@ export const Home = (): JSX.Element => {
 					opacity={40}
 					buttons={[
 						{ string: "Home", to: "/" },
-						{ string: "Aircraft", to: "/aircraft" },
+						//{ string: "Aircraft", to: "/aircraft" },
 						{ string: "Launcher", to: "/about" },
 					]}
 				/>
