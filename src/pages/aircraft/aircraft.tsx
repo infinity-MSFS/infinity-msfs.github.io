@@ -118,7 +118,7 @@ export const T38ProductPage = (): JSX.Element => {
 						>
 							<img
 								src={images[selectedImage]}
-								alt="T-38C Talon"
+								alt="T-38 Talon"
 								className={`w-full h-full object-cover transition-all duration-600 group-hover:scale-105 ${isTransitioning ? "opacity-0" : "opacity-100"
 									}`}
 								style={{ transition: "opacity 0.6s ease-in-out, transform 0.3s ease" }}
@@ -170,7 +170,7 @@ export const T38ProductPage = (): JSX.Element => {
 								>
 									<img
 										src={img}
-										alt={`T-38C ${index + 1}`}
+										alt={`T-38 ${index + 1}`}
 										className="w-full h-full object-cover"
 									/>
 								</button>
@@ -301,7 +301,7 @@ export const T38ProductPage = (): JSX.Element => {
 					{/* Right Column - Product Details */}
 					<div className="space-y-8 relative z-10">
 						<div>
-							<h1 className="text-4xl font-bold mb-2">T-38 Talon</h1>
+							<h1 className="text-4xl font-bold mb-2">T-38 Talon Professional</h1>
 							<p className="text-lg text-blue-300 mb-4">
 								for Microsoft Flight Simulator
 							</p>
