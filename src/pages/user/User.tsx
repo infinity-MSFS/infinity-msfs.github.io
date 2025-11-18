@@ -57,7 +57,7 @@ export const UserDashboard = (): JSX.Element => {
 				const access_token = await getAccessToken();
 
 				const response = await fetch(
-					"https://userbackend-nameless-fog-3967.fly.dev/api/user/products",
+					"https://userbackend-polished-morning-9484.fly.dev/api/user/products",
 					{
 						headers: {
 							Authorization: `Bearer ${access_token}`,
@@ -96,7 +96,7 @@ export const UserDashboard = (): JSX.Element => {
 			// For testing mode, use localhost backend
 			const API_URL = TESTING_MODE 
 				? 'http://localhost:3000'
-				: 'https://userbackend-nameless-fog-3967.fly.dev';
+				: 'https://userbackend-polished-morning-9484.fly.dev';
 
 			// Only get access token if not in testing mode
 			const headers: Record<string, string> = {
