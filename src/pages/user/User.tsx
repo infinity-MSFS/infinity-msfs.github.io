@@ -57,7 +57,7 @@ export const UserDashboard = (): JSX.Element => {
 				const access_token = await getAccessToken();
 
 				const response = await fetch(
-					"https://userbackend-nameless-fog-3967.fly.dev/api/user/products",
+					"https://userbackend-polished-morning-9484.fly.dev/api/user/products",
 					{
 						headers: {
 							Authorization: `Bearer ${access_token}`,
