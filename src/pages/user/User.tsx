@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from "../../util/AuthContext"
-import { Download, Key, Calendar, AlertCircle, X, Paperclip } from 'lucide-react'
+import { Download, Key, Calendar, AlertCircle, X } from 'lucide-react'
 //import { useNavigate } from 'react-router-dom'
 
 interface ProductData {
@@ -25,12 +25,14 @@ export const UserDashboard = (): JSX.Element => {
 	const [showSupportForm, setShowSupportForm] = useState(false)
 	const [supportForm, setSupportForm] = useState({
 		name: '',
+		email: '',
 		discordName: '',
 		subject: '',
-		message: '',
-		attachments: [] as File[]
+		message: ''
 	})
-	const [attachmentError, setAttachmentError] = useState<string | null>(null)
+	const [submitLoading, setSubmitLoading] = useState(false)
+	const [submitError, setSubmitError] = useState<string | null>(null)
+	const [submitSuccess, setSubmitSuccess] = useState(false)
 
 	// const nav = useNavigate()
 
@@ -82,74 +84,73 @@ export const UserDashboard = (): JSX.Element => {
 		fetchProductKey();
 	}, [isAuthenticated, user, getAccessToken]);
 
-	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setAttachmentError(null);
-		const files = Array.from(e.target.files || []);
-
-		// Validate total size (2MB = 2 * 1024 * 1024 bytes)
-		const maxSize = 2 * 1024 * 1024;
-		const totalSize = files.reduce((sum, file) => sum + file.size, 0);
-
-		if (totalSize > maxSize) {
-			setAttachmentError('Total file size must be less than 2MB');
-			return;
-		}
-
-		setSupportForm({ ...supportForm, attachments: files });
-	};
-
-	const removeAttachment = (index: number) => {
-		const newAttachments = supportForm.attachments.filter((_, i) => i !== index);
-		setSupportForm({ ...supportForm, attachments: newAttachments });
-		setAttachmentError(null);
-	};
-
 	const handleSupportSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setSubmitLoading(true);
+		setSubmitError(null);
+		setSubmitSuccess(false);
 
 		const currentUser = TESTING_MODE ? mockUser : user;
 
-		// Note: mailto: protocol doesn't support attachments
-		// You'll need to implement a backend API endpoint for proper email sending with attachments
-		// This is a temporary solution that opens the email client
+		try {
+			// For testing mode, use localhost backend
+			const API_URL = TESTING_MODE 
+				? 'http://localhost:3000'
+				: 'https://userbackend-polished-morning-9484.fly.dev';
 
-		const subject = encodeURIComponent(`[SUPPORT] ${supportForm.subject}`);
-		const body = encodeURIComponent(
-			`Name: ${supportForm.name}\n` +
-			`Discord: ${supportForm.discordName}\n` +
-			`Email: ${currentUser?.email || 'No email'}\n\n` +
-			`Message:\n${supportForm.message}\n\n` +
-			(supportForm.attachments.length > 0
-				? `Note: ${supportForm.attachments.length} file(s) attached (see attachment in email client)\n`
-				: '')
-		);
+			// Only get access token if not in testing mode
+			const headers: Record<string, string> = {
+				'Content-Type': 'application/json',
+			};
 
-		// For production, replace this with an API call to your backend
-		// Example:
-		// const formData = new FormData();
-		// formData.append('name', supportForm.name);
-		// formData.append('discordName', supportForm.discordName);
-		// formData.append('subject', supportForm.subject);
-		// formData.append('message', supportForm.message);
-		// supportForm.attachments.forEach(file => formData.append('attachments', file));
-		// 
-		// const response = await fetch('/api/support', {
-		//   method: 'POST',
-		//   body: formData
-		// });
+			if (!TESTING_MODE) {
+				const access_token = await getAccessToken();
+				headers['Authorization'] = `Bearer ${access_token}`;
+			}
 
-		window.location.href = `mailto:aero.msfs@gmail.com?subject=${subject}&body=${body}`;
+			const response = await fetch(
+				`${API_URL}/api/support`,
+				{
+					method: 'POST',
+					headers,
+					body: JSON.stringify({
+						name: supportForm.name,
+						email: supportForm.email,
+						discordName: supportForm.discordName,
+						subject: supportForm.subject,
+						message: supportForm.message,
+						userEmail: currentUser?.email || 'No email provided'
+					})
+				}
+			);
 
-		// Reset form and close modal
-		setSupportForm({
-			name: '',
-			discordName: '',
-			subject: '',
-			message: '',
-			attachments: []
-		});
-		setAttachmentError(null);
-		setShowSupportForm(false);
+			if (!response.ok) {
+				const errorData = await response.json().catch(() => ({ error: 'Failed to send message' }));
+				throw new Error(errorData.error || 'Failed to send message');
+			}
+
+			// Success
+			setSubmitSuccess(true);
+
+			// Reset form after 2 seconds
+			setTimeout(() => {
+				setSupportForm({
+					name: '',
+					email: '',
+					discordName: '',
+					subject: '',
+					message: ''
+				});
+				setShowSupportForm(false);
+				setSubmitSuccess(false);
+			}, 2000);
+
+		} catch (err) {
+			console.error('Failed to send support message:', err);
+			setSubmitError(err instanceof Error ? err.message : 'Failed to send message. Please try again.');
+		} finally {
+			setSubmitLoading(false);
+		}
 	};
 
 	if (!TESTING_MODE && (isLoading || fetchLoading)) {
@@ -355,18 +356,31 @@ export const UserDashboard = (): JSX.Element => {
 									setShowSupportForm(false);
 									setSupportForm({
 										name: '',
+										email: '',
 										discordName: '',
 										subject: '',
-										message: '',
-										attachments: []
+										message: ''
 									});
-									setAttachmentError(null);
+									setSubmitError(null);
+									setSubmitSuccess(false);
 								}}
 								className="text-white/60 hover:text-white transition-colors"
 							>
 								<X className="w-6 h-6" />
 							</button>
 						</div>
+
+						{submitSuccess && (
+							<div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4 mb-4">
+								<p className="text-green-200">Message sent successfully! We'll get back to you soon.</p>
+							</div>
+						)}
+
+						{submitError && (
+							<div className="bg-red-900/20 border border-red-500/30 rounded-lg p-4 mb-4">
+								<p className="text-red-200">{submitError}</p>
+							</div>
+						)}
 
 						<form onSubmit={handleSupportSubmit} className="space-y-4">
 							<div>
@@ -380,12 +394,34 @@ export const UserDashboard = (): JSX.Element => {
 									type="text"
 									id="name"
 									required
+									disabled={submitLoading}
 									value={supportForm.name}
 									onChange={(e) =>
 										setSupportForm({ ...supportForm, name: e.target.value })
 									}
-									className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+									className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
 									placeholder="Your full name"
+								/>
+							</div>
+
+							<div>
+								<label
+									htmlFor="email"
+									className="block text-sm font-medium mb-2"
+								>
+									Email <span className="text-red-400">*</span>
+								</label>
+								<input
+									type="email"
+									id="email"
+									required
+									disabled={submitLoading}
+									value={supportForm.email}
+									onChange={(e) =>
+										setSupportForm({ ...supportForm, email: e.target.value })
+									}
+									className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+									placeholder="your.email@example.com"
 								/>
 							</div>
 
@@ -399,11 +435,12 @@ export const UserDashboard = (): JSX.Element => {
 								<input
 									type="text"
 									id="discordName"
+									disabled={submitLoading}
 									value={supportForm.discordName}
 									onChange={(e) =>
 										setSupportForm({ ...supportForm, discordName: e.target.value })
 									}
-									className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+									className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
 									placeholder="username#1234"
 								/>
 							</div>
@@ -419,11 +456,12 @@ export const UserDashboard = (): JSX.Element => {
 									type="text"
 									id="subject"
 									required
+									disabled={submitLoading}
 									value={supportForm.subject}
 									onChange={(e) =>
 										setSupportForm({ ...supportForm, subject: e.target.value })
 									}
-									className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+									className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
 									placeholder="Brief description of your issue"
 								/>
 							</div>
@@ -439,94 +477,47 @@ export const UserDashboard = (): JSX.Element => {
 									id="message"
 									required
 									rows={6}
+									disabled={submitLoading}
 									value={supportForm.message}
 									onChange={(e) =>
 										setSupportForm({ ...supportForm, message: e.target.value })
 									}
-									className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+									className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none disabled:opacity-50"
 									placeholder="Describe your issue in detail..."
 								/>
-							</div>
-
-							<div>
-								<label className="block text-sm font-medium mb-2">
-									Attachments (max 2MB total)
-								</label>
-								<div className="relative">
-									<input
-										type="file"
-										id="attachments"
-										multiple
-										onChange={handleFileChange}
-										className="hidden"
-									/>
-									<label
-										htmlFor="attachments"
-										className="flex items-center justify-center gap-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white hover:bg-white/10 transition-colors cursor-pointer"
-									>
-										<Paperclip className="w-4 h-4" />
-										<span className="text-sm">
-											{supportForm.attachments.length > 0
-												? `${supportForm.attachments.length} file(s) selected`
-												: 'Choose files'}
-										</span>
-									</label>
-								</div>
-
-								{attachmentError && (
-									<p className="text-red-400 text-xs mt-1">{attachmentError}</p>
-								)}
-
-								{supportForm.attachments.length > 0 && (
-									<div className="mt-2 space-y-1">
-										{supportForm.attachments.map((file, index) => (
-											<div
-												key={index}
-												className="flex items-center justify-between bg-white/5 rounded px-3 py-2 text-sm"
-											>
-												<span className="truncate flex-1 text-white/80">
-													{file.name} ({(file.size / 1024).toFixed(1)}KB)
-												</span>
-												<button
-													type="button"
-													onClick={() => removeAttachment(index)}
-													className="text-red-400 hover:text-red-300 ml-2"
-												>
-													<X className="w-4 h-4" />
-												</button>
-											</div>
-										))}
-									</div>
-								)}
-							</div>
-
-							<div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-3 text-sm">
-								<p className="text-yellow-200 text-xs">
-									Note: File attachments may not work with all email clients. For best results, consider uploading files to a cloud service and including the link in your message.
-								</p>
 							</div>
 
 							<div className="flex gap-3">
 								<button
 									type="submit"
-									className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-semibold"
+									disabled={submitLoading}
+									className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 								>
-									Send Message
+									{submitLoading ? (
+										<>
+											<div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+											Sending...
+										</>
+									) : (
+										'Send Message'
+									)}
 								</button>
 								<button
 									type="button"
+									disabled={submitLoading}
 									onClick={() => {
 										setShowSupportForm(false);
 										setSupportForm({
 											name: '',
+											email: '',
 											discordName: '',
 											subject: '',
-											message: '',
-											attachments: []
+											message: ''
 										});
-										setAttachmentError(null);
+										setSubmitError(null);
+										setSubmitSuccess(false);
 									}}
-									className="flex-1 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors"
+									className="flex-1 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
 								>
 									Cancel
 								</button>
