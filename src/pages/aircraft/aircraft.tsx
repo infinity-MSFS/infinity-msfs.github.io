@@ -21,24 +21,27 @@ export const T38ProductPage = (): JSX.Element => {
 	const { user, isAuthenticated, loginWithRedirect } = useAuth();
 	const user_id = user?.sub;
 
-	const images = [
-		"https://i.gyazo.com/7d933a5426c4230744fcb87341d17b47.png",
-		"https://i.gyazo.com/2872c40132aa53ae5755134a458702ba.png",
-		"https://i.gyazo.com/a858613b7cdba9a0eebf2349578848fc.png",
-		"https://i.gyazo.com/e456df009b1be6ed5fb03bd05f28d7a8.png",
-		"https://i.gyazo.com/40d9fe23bb6bdc58ddc4313e2f384cd6.png",
-		"https://i.gyazo.com/59b9f2b1dd8a129adf91cf662e9f8e4d.png",
-		"https://i.gyazo.com/942427990d0a497470bb28ad5b4963b9.png",
-		"https://i.gyazo.com/9857a3c6e790cbc9d407313d54b963f6.png",
-		"https://i.gyazo.com/a09d9028403d7e1d61411576e4bbc973.png",
-		"https://i.gyazo.com/de6d1d732cd78e0027e687f68a519375.png",
-		"https://i.gyazo.com/ef58918c12b981dc8ab00fd8c31e582e.png",
-		"https://i.gyazo.com/d0f3cf113d6bd3fbff0d43e7b64a9c8e.png",
-		"https://i.gyazo.com/65d3f0853fa7408ff8d80b1c07cc1217.png",
-		"https://i.gyazo.com/935767198e2377593ab190b6b4663c66.png",
-		"https://i.gyazo.com/a5b153756fc81535db90123768fcec93.png",
-		"https://i.gyazo.com/311b37136b44e1ff916eca8a4e1d4d13.png",
-
+	// Combined media array with video first, then images
+	const media = [
+		{ type: "video", url: "https://www.youtube.com/embed/UWyNS5RO99c", thumbnail: "https://img.youtube.com/vi/UWyNS5RO99c/maxresdefault.jpg" },
+		{ type: "image", url: "https://i.gyazo.com/7d933a5426c4230744fcb87341d17b47.png" },
+		{ type: "image", url: "https://i.gyazo.com/2872c40132aa53ae5755134a458702ba.png" },
+		{ type: "image", url: "https://i.gyazo.com/a858613b7cdba9a0eebf2349578848fc.png" },
+		{ type: "image", url: "https://i.gyazo.com/e456df009b1be6ed5fb03bd05f28d7a8.png" },
+		{ type: "image", url: "https://i.gyazo.com/40d9fe23bb6bdc58ddc4313e2f384cd6.png" },
+		{ type: "image", url: "https://i.gyazo.com/59b9f2b1dd8a129adf91cf662e9f8e4d.png" },
+		{ type: "image", url: "https://i.gyazo.com/942427990d0a497470bb28ad5b4963b9.png" },
+		{ type: "image", url: "https://i.gyazo.com/9857a3c6e790cbc9d407313d54b963f6.png" },
+		{ type: "image", url: "https://i.gyazo.com/a09d9028403d7e1d61411576e4bbc973.png" },
+		{ type: "image", url: "https://i.gyazo.com/de6d1d732cd78e0027e687f68a519375.png" },
+		{ type: "image", url: "https://i.gyazo.com/ef58918c12b981dc8ab00fd8c31e582e.png" },
+		{ type: "image", url: "https://i.gyazo.com/d0f3cf113d6bd3fbff0d43e7b64a9c8e.png" },
+		{ type: "image", url: "https://i.gyazo.com/65d3f0853fa7408ff8d80b1c07cc1217.png" },
+		{ type: "image", url: "https://i.gyazo.com/935767198e2377593ab190b6b4663c66.png" },
+		{ type: "image", url: "https://i.gyazo.com/a5b153756fc81535db90123768fcec93.png" },
+		{ type: "image", url: "https://i.gyazo.com/311b37136b44e1ff916eca8a4e1d4d13.png" },
+		{ type: "image", url: "https://i.gyazo.com/60c1afe0bce112762da58d5fdfdc195f.png" },
+		{ type: "image", url: "https://i.gyazo.com/c1d21f7e9dfb40a52426dd15ab8c93eb.png" },
 	];
 
 	const features = [
@@ -74,16 +77,19 @@ export const T38ProductPage = (): JSX.Element => {
 		const interval = setInterval(() => {
 			setIsTransitioning(true);
 			setTimeout(() => {
-				setSelectedImage((prev) => (prev + 1) % images.length);
+				setSelectedImage((prev) => (prev + 1) % media.length);
 				setIsTransitioning(false);
 			}, 300); // Half of the transition duration for crossfade effect
 		}, 5000);
 
 		return () => clearInterval(interval);
-	}, [images.length, isZoomed, isPlaying]); // Added isPlaying to dependency array
+	}, [media.length, isZoomed, isPlaying]); // Added isPlaying to dependency array
 
 	const handleImageClick = () => {
-		setIsZoomed(true);
+		// Only allow zoom for images, not video
+		if (media[selectedImage].type === "image") {
+			setIsZoomed(true);
+		}
 	};
 
 	const handleCloseZoom = () => {
@@ -102,6 +108,8 @@ export const T38ProductPage = (): JSX.Element => {
 		setIsPlaying(!isPlaying);
 	};
 
+	const currentMedia = media[selectedImage];
+
 	return (
 		<div className="min-h-screen text-white relative z-10">
 			<div className="max-w-7xl mx-auto px-8 py-12">
@@ -113,42 +121,59 @@ export const T38ProductPage = (): JSX.Element => {
 					<div className="space-y-4 relative z-10">
 						{/** biome-ignore lint/a11y/noStaticElementInteractions: needed */}
 						<div
-							className="aspect-video bg-white/5 rounded-xl overflow-hidden border border-white/10 relative group cursor-zoom-in"
+							className={`aspect-video bg-white/5 rounded-xl overflow-hidden border border-white/10 relative group ${currentMedia.type === "image" ? "cursor-zoom-in" : ""
+								}`}
 							onClick={handleImageClick}
 						>
-							<img
-								src={images[selectedImage]}
-								alt="T-38 Talon"
-								className={`w-full h-full object-cover transition-all duration-600 group-hover:scale-105 ${isTransitioning ? "opacity-0" : "opacity-100"
-									}`}
-								style={{ transition: "opacity 0.6s ease-in-out, transform 0.3s ease" }}
-							/>
-							{/* Hover overlay with zoom icon */}
-							<div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-								<div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/10 backdrop-blur-sm rounded-full p-4">
-									<ZoomIn className="w-8 h-8 text-white" />
+							{currentMedia.type === "video" ? (
+								<iframe
+									className="w-full h-full"
+									src={currentMedia.url}
+									title="T-38 Talon Video"
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+									allowFullScreen
+								/>
+							) : (
+								<>
+									<img
+										src={currentMedia.url}
+										alt="T-38 Talon"
+										className={`w-full h-full object-cover transition-all duration-600 group-hover:scale-105 ${isTransitioning ? "opacity-0" : "opacity-100"
+											}`}
+										style={{ transition: "opacity 0.6s ease-in-out, transform 0.3s ease" }}
+									/>
+									{/* Hover overlay with zoom icon - only for images */}
+									<div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+										<div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/10 backdrop-blur-sm rounded-full p-4">
+											<ZoomIn className="w-8 h-8 text-white" />
+										</div>
+									</div>
+								</>
+							)}
+							{/* Image counter - only show for images */}
+							{currentMedia.type === "image" && (
+								<div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full text-sm">
+									{selectedImage + 1} / {media.length}
 								</div>
-							</div>
-							{/* Image counter */}
-							<div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full text-sm">
-								{selectedImage + 1} / {images.length}
-							</div>
-							{/* Play/Pause button - only visible on hover */}
-							<button
-								type="button"
-								onClick={(e) => {
-									e.stopPropagation();
-									togglePlayPause();
-								}}
-								className="absolute bottom-4 left-4 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full p-2 transition-all z-10 opacity-0 group-hover:opacity-100"
-								aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
-							>
-								{isPlaying ? (
-									<Pause className="w-5 h-5 text-white" />
-								) : (
-									<Play className="w-5 h-5 text-white" />
-								)}
-							</button>
+							)}
+							{/* Play/Pause button - only visible on hover for images */}
+							{currentMedia.type === "image" && (
+								<button
+									type="button"
+									onClick={(e) => {
+										e.stopPropagation();
+										togglePlayPause();
+									}}
+									className="absolute bottom-4 left-4 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full p-2 transition-all z-10 opacity-0 group-hover:opacity-100"
+									aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
+								>
+									{isPlaying ? (
+										<Pause className="w-5 h-5 text-white" />
+									) : (
+										<Play className="w-5 h-5 text-white" />
+									)}
+								</button>
+							)}
 						</div>
 						<div
 							className="grid grid-cols-4 gap-2 max-h-[200px] overflow-y-auto overflow-x-hidden scroll-smooth"
@@ -157,22 +182,27 @@ export const T38ProductPage = (): JSX.Element => {
 								scrollbarColor: 'rgba(255, 255, 255, 0.3) transparent'
 							}}
 						>
-							{images.map((img, index) => (
+							{media.map((item, index) => (
 								<button
 									type="button"
 									// biome-ignore lint/suspicious/noArrayIndexKey: perfectly fine in this implementaiton
 									key={index}
 									onClick={() => handleThumbnailClick(index)}
 									className={`aspect-video rounded-lg overflow-hidden border-2 transition-all transform hover:scale-105 ${selectedImage === index
-										? "border-blue-400 shadow-lg shadow-blue-400/50"
-										: "border-white/20 hover:border-white/40"
+											? "border-blue-400 shadow-lg shadow-blue-400/50"
+											: "border-white/20 hover:border-white/40"
 										}`}
 								>
 									<img
-										src={img}
+										src={item.type === "video" ? item.thumbnail : item.url}
 										alt={`T-38 ${index + 1}`}
 										className="w-full h-full object-cover"
 									/>
+									{item.type === "video" && (
+										<div className="absolute inset-0 flex items-center justify-center bg-black/30">
+											<Play className="w-8 h-8 text-white" />
+										</div>
+									)}
 								</button>
 							))}
 						</div>
@@ -199,7 +229,7 @@ export const T38ProductPage = (): JSX.Element => {
 							{/* Image counter in zoom mode */}
 							<div className="absolute top-4 left-4 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg text-white z-10">
 								<span className="font-semibold">
-									{selectedImage + 1} / {images.length}
+									{selectedImage + 1} / {media.length}
 								</span>
 							</div>
 
@@ -230,7 +260,7 @@ export const T38ProductPage = (): JSX.Element => {
 								</button>
 							)}
 
-							{selectedImage < images.length - 1 && (
+							{selectedImage < media.length - 1 && (
 								<button
 									type="button"
 									onClick={(e) => {
@@ -262,7 +292,7 @@ export const T38ProductPage = (): JSX.Element => {
 								onClick={(e) => e.stopPropagation()}
 							>
 								<img
-									src={images[selectedImage]}
+									src={media[selectedImage].url}
 									alt="T-38 Talon Full Resolution"
 									className={`max-w-full max-h-[95vh] w-auto h-auto object-contain rounded-lg shadow-2xl transition-opacity duration-600 ${isTransitioning ? "opacity-0" : "opacity-100"
 										}`}
@@ -272,7 +302,7 @@ export const T38ProductPage = (): JSX.Element => {
 							{/* Thumbnail strip at bottom - no scrollbar */}
 							<div className="absolute bottom-4 left-1/2 -translate-x-1/2 overflow-hidden max-w-[90vw]">
 								<div className="flex flex-wrap justify-center gap-2 bg-black/60 backdrop-blur-sm p-2 rounded-lg">
-									{images.map((img, index) => (
+									{media.map((item, index) => (
 										<button
 											type="button"
 											// biome-ignore lint/suspicious/noArrayIndexKey: fine here
@@ -281,16 +311,21 @@ export const T38ProductPage = (): JSX.Element => {
 												e.stopPropagation();
 												handleThumbnailClick(index);
 											}}
-											className={`flex-shrink-0 w-16 h-16 rounded border-2 overflow-hidden transition-all ${selectedImage === index
-												? "border-blue-400 scale-110"
-												: "border-white/30 hover:border-white/60"
+											className={`flex-shrink-0 w-16 h-16 rounded border-2 overflow-hidden transition-all relative ${selectedImage === index
+													? "border-blue-400 scale-110"
+													: "border-white/30 hover:border-white/60"
 												}`}
 										>
 											<img
-												src={img}
+												src={item.type === "video" ? item.thumbnail : item.url}
 												alt={`T-38 ${index + 1}`}
 												className="w-full h-full object-cover"
 											/>
+											{item.type === "video" && (
+												<div className="absolute inset-0 flex items-center justify-center bg-black/30">
+													<Play className="w-4 h-4 text-white" />
+												</div>
+											)}
 										</button>
 									))}
 								</div>
@@ -306,7 +341,7 @@ export const T38ProductPage = (): JSX.Element => {
 								by Aero Dynamics Development
 							</p>
 							<p className="text-xs text-blue-300 mb-4">
-                                with Infinity and Delta Simulations
+								with Infinity and Delta Simulations
 							</p>
 							<p className="text-sm text-yellow-300 mb-6">
 								*Purchase includes aircraft for Microsoft Flight Simulator 2024
@@ -392,7 +427,7 @@ export const T38ProductPage = (): JSX.Element => {
 								className="bg-white/5 rounded-lg p-4 border border-white/10 hover:bg-white/10 transition-colors"
 							>
 								<div className="flex items-start space-x-3">
-									<div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
+									<div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
 									<span className="text-white/90">{feature}</span>
 								</div>
 							</div>
@@ -451,7 +486,7 @@ export const T38ProductPage = (): JSX.Element => {
 								type="button"
 								className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition-colors"
 							>
-                                WORK IN PROGRESS
+								WORK IN PROGRESS
 							</button>
 						</div>
 					</div>
