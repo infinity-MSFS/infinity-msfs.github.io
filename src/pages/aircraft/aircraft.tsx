@@ -10,6 +10,7 @@ import {
 	X,
 	Play,
 	Pause,
+	Shield,
 } from "lucide-react";
 import { useAuth } from "../../util/AuthContext";
 
@@ -18,6 +19,7 @@ export const T38ProductPage = (): JSX.Element => {
 	const [isZoomed, setIsZoomed] = useState(false);
 	const [isTransitioning, setIsTransitioning] = useState(false);
 	const [isPlaying, setIsPlaying] = useState(true);
+	const [isEulaOpen, setIsEulaOpen] = useState(false);
 	const { user, isAuthenticated, loginWithRedirect } = useAuth();
 	const user_id = user?.sub;
 
@@ -189,8 +191,8 @@ export const T38ProductPage = (): JSX.Element => {
 									key={index}
 									onClick={() => handleThumbnailClick(index)}
 									className={`aspect-video rounded-lg overflow-hidden border-2 transition-all transform hover:scale-105 ${selectedImage === index
-											? "border-blue-400 shadow-lg shadow-blue-400/50"
-											: "border-white/20 hover:border-white/40"
+										? "border-blue-400 shadow-lg shadow-blue-400/50"
+										: "border-white/20 hover:border-white/40"
 										}`}
 								>
 									<img
@@ -312,8 +314,8 @@ export const T38ProductPage = (): JSX.Element => {
 												handleThumbnailClick(index);
 											}}
 											className={`flex-shrink-0 w-16 h-16 rounded border-2 overflow-hidden transition-all relative ${selectedImage === index
-													? "border-blue-400 scale-110"
-													: "border-white/30 hover:border-white/60"
+												? "border-blue-400 scale-110"
+												: "border-white/30 hover:border-white/60"
 												}`}
 										>
 											<img
@@ -492,6 +494,18 @@ export const T38ProductPage = (): JSX.Element => {
 					</div>
 				</div>
 
+				{/* EULA Section */}
+				<div className="mt-12 text-center">
+					<button
+						type="button"
+						onClick={() => setIsEulaOpen(true)}
+						className="inline-flex items-center space-x-2 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white px-6 py-3 rounded-lg border border-white/10 transition-colors"
+					>
+						<Shield className="w-5 h-5" />
+						<span>End-User License Agreement (EULA)</span>
+					</button>
+				</div>
+
 				{/* Footer Note */}
 				<div className="mt-12 text-center text-white/60">
 					<p className="mb-2">
@@ -505,6 +519,139 @@ export const T38ProductPage = (): JSX.Element => {
 					</p>
 				</div>
 			</div>
+
+			{/* EULA Modal */}
+			{isEulaOpen && (
+				// biome-ignore lint/a11y/useKeyWithClickEvents: close button handles keyboard
+				// biome-ignore lint/a11y/noStaticElementInteractions: backdrop click to close
+				<div
+					className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4 animate-fadeIn"
+					onClick={() => setIsEulaOpen(false)}
+				>
+					{/** biome-ignore lint/a11y/noStaticElementInteractions: modal content should not close on click */}
+					<div
+						className="bg-gray-900 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-white/20 shadow-2xl"
+						onClick={(e) => e.stopPropagation()}
+					>
+						{/* Header */}
+						<div className="bg-white/5 border-b border-white/10 p-6 flex items-center justify-between">
+							<div className="flex items-center space-x-3">
+								<Shield className="w-6 h-6 text-blue-400" />
+								<h2 className="text-2xl font-bold text-white">End-User License Agreement</h2>
+							</div>
+							<button
+								type="button"
+								onClick={() => setIsEulaOpen(false)}
+								className="bg-white/10 hover:bg-white/20 rounded-full p-2 transition-all group"
+								aria-label="Close EULA"
+							>
+								<X className="w-5 h-5 text-white group-hover:rotate-90 transition-transform duration-300" />
+							</button>
+						</div>
+
+						{/* Content */}
+						<div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)] text-white/90 space-y-4 text-sm leading-relaxed">
+							<div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 mb-6">
+								<p className="font-bold text-yellow-300 mb-2">IMPORTANT - READ CAREFULLY:</p>
+								<p className="text-yellow-200/90">
+									This End-User License Agreement ("EULA") is a legal agreement between you (the "User" or "you") and Aero Dynamics Development LLC (the "Author") for the T-38A and T-38C aircraft add-on ("Add-on") for Microsoft Flight Simulator 2024.
+								</p>
+								<p className="mt-3 text-yellow-200/90">
+									By downloading, installing, or using the Add-on, you agree to be bound by the terms of this EULA. If you do not agree, do not install or use the Add-on and delete all copies immediately.
+								</p>
+							</div>
+
+							<div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-6">
+								<p className="font-bold text-red-300 mb-2">DISCLAIMER:</p>
+								<p className="text-red-200/90">
+									Aero Dynamics Development LLC has no affiliation, sponsorship, or endorsement from the United States Air Force (USAF), Northrop Grumman, or any government entity in connection with this Add-on. This is an unofficial, independent project created for entertainment purposes only within Microsoft Flight Simulator 2024.
+								</p>
+							</div>
+
+							<div>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">1. GRANT OF LICENSE</h3>
+								<p>
+									The Author grants you a limited, non-exclusive, non-transferable, royalty-free license to install and use the Add-on solely for personal, non-commercial entertainment purposes within Microsoft Flight Simulator 2024.
+								</p>
+							</div>
+
+							<div>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">2. PERMITTED USE</h3>
+								<p>
+									You may install and use the Add-on on personal computers you own or control for private, non-commercial use only.
+								</p>
+							</div>
+
+							<div>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">3. RESTRICTIONS</h3>
+								<p className="mb-2">You may NOT:</p>
+								<ul className="list-disc list-inside space-y-1 pl-4">
+									<li>Make backup or archival copies of the Add-on.</li>
+									<li>Redistribute, sell, rent, lease, sublicense, or otherwise transfer the Add-on or any part thereof.</li>
+									<li>Modify, adapt, translate, reverse engineer, decompile, disassemble, or create derivative works based on the Add-on.</li>
+									<li>Use the Add-on for any commercial purpose, including but not limited to flight training, professional simulation, or public exhibition where admission is charged.</li>
+									<li>Remove or alter any copyright, trademark, or proprietary notices in the Add-on files.</li>
+								</ul>
+							</div>
+
+							<div>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">4. OWNERSHIP</h3>
+								<p>
+									The Add-on is licensed, not sold. The Author retains all right, title, and interest in and to the Add-on, including all intellectual property rights.
+								</p>
+							</div>
+
+							<div>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">5. NO WARRANTY</h3>
+								<p>
+									THE ADD-ON IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. THE AUTHOR DOES NOT WARRANT THAT THE ADD-ON WILL BE ERROR-FREE OR COMPATIBLE WITH FUTURE VERSIONS OF MICROSOFT FLIGHT SIMULATOR 2024.
+								</p>
+							</div>
+
+							<div>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">6. LIMITATION OF LIABILITY</h3>
+								<p>
+									IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES ARISING FROM THE USE OR INABILITY TO USE THE ADD-ON.
+								</p>
+							</div>
+
+							<div>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">7. TERMINATION</h3>
+								<p>
+									This license terminates automatically if you violate any term. Upon termination, you must destroy all copies of the Add-on.
+								</p>
+							</div>
+
+							<div>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">8. GOVERNING LAW</h3>
+								<p>
+									This EULA shall be governed by the laws of the United States of America.
+								</p>
+							</div>
+
+							<div className="border-t border-white/10 pt-4 mt-6">
+								<p className="text-white/60 text-xs">
+									Copyright - 2025 Aero Dynamics Development LLC. All rights reserved.
+								</p>
+								<p className="text-white/60 text-xs mt-1">
+									Microsoft Flight Simulator 2024 is a trademark of Microsoft Corporation.
+								</p>
+							</div>
+						</div>
+
+						{/* Footer */}
+						<div className="bg-white/5 border-t border-white/10 p-4 flex justify-end">
+							<button
+								type="button"
+								onClick={() => setIsEulaOpen(false)}
+								className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+							>
+								Close
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };
