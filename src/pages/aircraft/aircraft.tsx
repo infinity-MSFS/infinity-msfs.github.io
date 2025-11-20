@@ -72,9 +72,11 @@ export const T38ProductPage = (): JSX.Element => {
 		{ label: "Max Takeoff Weight", value: "12,000 lb" },
 	];
 
-	// Auto-advance images every 5 seconds, but only when not zoomed and playing
+	const currentMedia = media[selectedImage];
+
+	// Auto-advance images every 5 seconds, but only when not zoomed, playing, and not viewing video
 	useEffect(() => {
-		if (isZoomed || !isPlaying) return; // Don't auto-advance when zoomed or paused
+		if (isZoomed || !isPlaying || currentMedia.type === "video") return; // Don't auto-advance when zoomed, paused, or viewing video
 
 		const interval = setInterval(() => {
 			setIsTransitioning(true);
@@ -85,7 +87,7 @@ export const T38ProductPage = (): JSX.Element => {
 		}, 5000);
 
 		return () => clearInterval(interval);
-	}, [media.length, isZoomed, isPlaying]); // Added isPlaying to dependency array
+	}, [media.length, isZoomed, isPlaying, currentMedia.type]); // Added currentMedia.type to dependency array
 
 	const handleImageClick = () => {
 		// Only allow zoom for images, not video
@@ -109,8 +111,6 @@ export const T38ProductPage = (): JSX.Element => {
 	const togglePlayPause = () => {
 		setIsPlaying(!isPlaying);
 	};
-
-	const currentMedia = media[selectedImage];
 
 	return (
 		<div className="min-h-screen text-white relative z-10">
@@ -631,7 +631,7 @@ export const T38ProductPage = (): JSX.Element => {
 
 							<div className="border-t border-white/10 pt-4 mt-6">
 								<p className="text-white/60 text-xs">
-									Copyright - 2025 Aero Dynamics Development LLC. All rights reserved.
+									Copyright © 2025 Aero Dynamics Development LLC. All rights reserved.
 								</p>
 								<p className="text-white/60 text-xs mt-1">
 									Microsoft Flight Simulator 2024 is a trademark of Microsoft Corporation.
