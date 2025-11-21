@@ -123,8 +123,9 @@ export const T38ProductPage = (): JSX.Element => {
 					<div className="space-y-4 relative z-10">
 						{/** biome-ignore lint/a11y/noStaticElementInteractions: needed */}
 						<div
-							className={`aspect-video bg-white/5 rounded-xl overflow-hidden border border-white/10 relative group ${currentMedia.type === "image" ? "cursor-zoom-in" : ""
-								}`}
+							className={`aspect-video bg-white/5 rounded-xl overflow-hidden border border-white/10 relative group ${
+								currentMedia.type === "image" ? "cursor-zoom-in" : ""
+							}`}
 							onClick={handleImageClick}
 						>
 							{currentMedia.type === "video" ? (
@@ -140,9 +141,13 @@ export const T38ProductPage = (): JSX.Element => {
 									<img
 										src={currentMedia.url}
 										alt="T-38 Talon"
-										className={`w-full h-full object-cover transition-all duration-600 group-hover:scale-105 ${isTransitioning ? "opacity-0" : "opacity-100"
-											}`}
-										style={{ transition: "opacity 0.6s ease-in-out, transform 0.3s ease" }}
+										className={`w-full h-full object-cover transition-all duration-600 group-hover:scale-105 ${
+											isTransitioning ? "opacity-0" : "opacity-100"
+										}`}
+										style={{
+											transition:
+												"opacity 0.6s ease-in-out, transform 0.3s ease",
+										}}
 									/>
 									{/* Hover overlay with zoom icon - only for images */}
 									<div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
@@ -180,8 +185,8 @@ export const T38ProductPage = (): JSX.Element => {
 						<div
 							className="grid grid-cols-4 gap-2 max-h-[200px] overflow-y-auto overflow-x-hidden scroll-smooth"
 							style={{
-								scrollbarWidth: 'thin',
-								scrollbarColor: 'rgba(255, 255, 255, 0.3) transparent'
+								scrollbarWidth: "thin",
+								scrollbarColor: "rgba(255, 255, 255, 0.3) transparent",
 							}}
 						>
 							{media.map((item, index) => (
@@ -190,10 +195,11 @@ export const T38ProductPage = (): JSX.Element => {
 									// biome-ignore lint/suspicious/noArrayIndexKey: perfectly fine in this implementaiton
 									key={index}
 									onClick={() => handleThumbnailClick(index)}
-									className={`aspect-video rounded-lg overflow-hidden border-2 transition-all transform hover:scale-105 ${selectedImage === index
-										? "border-blue-400 shadow-lg shadow-blue-400/50"
-										: "border-white/20 hover:border-white/40"
-										}`}
+									className={`aspect-video rounded-lg overflow-hidden border-2 transition-all transform hover:scale-105 ${
+										selectedImage === index
+											? "border-blue-400 shadow-lg shadow-blue-400/50"
+											: "border-white/20 hover:border-white/40"
+									}`}
 								>
 									<img
 										src={item.type === "video" ? item.thumbnail : item.url}
@@ -296,8 +302,9 @@ export const T38ProductPage = (): JSX.Element => {
 								<img
 									src={media[selectedImage].url}
 									alt="T-38 Talon Full Resolution"
-									className={`max-w-full max-h-[95vh] w-auto h-auto object-contain rounded-lg shadow-2xl transition-opacity duration-600 ${isTransitioning ? "opacity-0" : "opacity-100"
-										}`}
+									className={`max-w-full max-h-[95vh] w-auto h-auto object-contain rounded-lg shadow-2xl transition-opacity duration-600 ${
+										isTransitioning ? "opacity-0" : "opacity-100"
+									}`}
 								/>
 							</div>
 
@@ -313,10 +320,11 @@ export const T38ProductPage = (): JSX.Element => {
 												e.stopPropagation();
 												handleThumbnailClick(index);
 											}}
-											className={`flex-shrink-0 w-16 h-16 rounded border-2 overflow-hidden transition-all relative ${selectedImage === index
-												? "border-blue-400 scale-110"
-												: "border-white/30 hover:border-white/60"
-												}`}
+											className={`flex-shrink-0 w-16 h-16 rounded border-2 overflow-hidden transition-all relative ${
+												selectedImage === index
+													? "border-blue-400 scale-110"
+													: "border-white/30 hover:border-white/60"
+											}`}
 										>
 											<img
 												src={item.type === "video" ? item.thumbnail : item.url}
@@ -338,7 +346,9 @@ export const T38ProductPage = (): JSX.Element => {
 					{/* Right Column - Product Details */}
 					<div className="space-y-8 relative z-10">
 						<div>
-							<h1 className="text-4xl font-bold mb-2">T-38 Talon Professional</h1>
+							<h1 className="text-4xl font-bold mb-2">
+								T-38 Talon Professional
+							</h1>
 							<p className="text-xl text-blue-300 mb-0">
 								by Aero Dynamics Development
 							</p>
@@ -360,11 +370,12 @@ export const T38ProductPage = (): JSX.Element => {
 
 							<p className="text-white/90 leading-relaxed mb-8">
 								The T-38 Talon Professional for Microsoft Flight Simulator 2024
-								features a highly detailed 3D model for both the T-38A and the Modern
-								T-38C. This package include a beautiful hand-crafted aircraft with
-								authentic flight dynamics, and a functional virtual cockpit. Whether
-								you're a student pilot mastering the basics or an experienced aviator
-								seeking high-speed thrills, this add-on delivers an unparalleled training experience.
+								features a highly detailed 3D model for both the T-38A and the
+								Modern T-38C. This package include a beautiful hand-crafted
+								aircraft with authentic flight dynamics, and a functional
+								virtual cockpit. Whether you're a student pilot mastering the
+								basics or an experienced aviator seeking high-speed thrills,
+								this add-on delivers an unparalleled training experience.
 							</p>
 
 							<div className="flex items-center space-x-4 mb-8">
@@ -374,7 +385,7 @@ export const T38ProductPage = (): JSX.Element => {
 							{isAuthenticated && user ? (
 								<div className="flex space-x-4 mb-8">
 									<a
-										href={`https://infinitymsfs.lemonsqueezy.com/buy/5d93bb10-bd78-4abc-b3d7-9cbff337a7ab?checkout[custom][auth0_user_id]=${user_id}`}
+										href={`https://infinitymsfs.lemonsqueezy.com/buy/4ece16b8-1f81-440a-8267-4598136b3f36?checkout[custom][auth0_user_id]=${user_id}`}
 										target="_blank"
 									>
 										<button
@@ -509,13 +520,16 @@ export const T38ProductPage = (): JSX.Element => {
 				{/* Footer Note */}
 				<div className="mt-12 text-center text-white/60">
 					<p className="mb-2">
-						Developed with feedback from T-38 pilots and MSFS community input to ensure authenticity.
+						Developed with feedback from T-38 pilots and MSFS community input to
+						ensure authenticity.
 					</p>
 					<p className="mb-2">
-						Take command of the T-38 Talon and experience the ultimate jet trainer in Microsoft Flight Simulator!
+						Take command of the T-38 Talon and experience the ultimate jet
+						trainer in Microsoft Flight Simulator!
 					</p>
 					<p className="mb-2">
-						Developed by Aero Dynamics Development LLC in collaboration with Infinity and Delta Simulations.
+						Developed by Aero Dynamics Development LLC in collaboration with
+						Infinity and Delta Simulations.
 					</p>
 				</div>
 			</div>
@@ -537,7 +551,9 @@ export const T38ProductPage = (): JSX.Element => {
 						<div className="bg-white/5 border-b border-white/10 p-6 flex items-center justify-between">
 							<div className="flex items-center space-x-3">
 								<Shield className="w-6 h-6 text-blue-400" />
-								<h2 className="text-2xl font-bold text-white">End-User License Agreement</h2>
+								<h2 className="text-2xl font-bold text-white">
+									End-User License Agreement
+								</h2>
 							</div>
 							<button
 								type="button"
@@ -552,89 +568,149 @@ export const T38ProductPage = (): JSX.Element => {
 						{/* Content */}
 						<div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)] text-white/90 space-y-4 text-sm leading-relaxed">
 							<div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 mb-6">
-								<p className="font-bold text-yellow-300 mb-2">IMPORTANT - READ CAREFULLY:</p>
+								<p className="font-bold text-yellow-300 mb-2">
+									IMPORTANT - READ CAREFULLY:
+								</p>
 								<p className="text-yellow-200/90">
-									This End-User License Agreement ("EULA") is a legal agreement between you (the "User" or "you") and Aero Dynamics Development LLC (the "Author") for the T-38A and T-38C aircraft add-on ("Add-on") for Microsoft Flight Simulator 2024.
+									This End-User License Agreement ("EULA") is a legal agreement
+									between you (the "User" or "you") and Aero Dynamics
+									Development LLC (the "Author") for the T-38A and T-38C
+									aircraft add-on ("Add-on") for Microsoft Flight Simulator
+									2024.
 								</p>
 								<p className="mt-3 text-yellow-200/90">
-									By downloading, installing, or using the Add-on, you agree to be bound by the terms of this EULA. If you do not agree, do not install or use the Add-on and delete all copies immediately.
+									By downloading, installing, or using the Add-on, you agree to
+									be bound by the terms of this EULA. If you do not agree, do
+									not install or use the Add-on and delete all copies
+									immediately.
 								</p>
 							</div>
 
 							<div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-6">
 								<p className="font-bold text-red-300 mb-2">DISCLAIMER:</p>
 								<p className="text-red-200/90">
-									Aero Dynamics Development LLC has no affiliation, sponsorship, or endorsement from the United States Air Force (USAF), Northrop Grumman, or any government entity in connection with this Add-on. This is an unofficial, independent project created for entertainment purposes only within Microsoft Flight Simulator 2024.
+									Aero Dynamics Development LLC has no affiliation, sponsorship,
+									or endorsement from the United States Air Force (USAF),
+									Northrop Grumman, or any government entity in connection with
+									this Add-on. This is an unofficial, independent project
+									created for entertainment purposes only within Microsoft
+									Flight Simulator 2024.
 								</p>
 							</div>
 
 							<div>
-								<h3 className="text-lg font-bold text-blue-400 mb-2">1. GRANT OF LICENSE</h3>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">
+									1. GRANT OF LICENSE
+								</h3>
 								<p>
-									The Author grants you a limited, non-exclusive, non-transferable, royalty-free license to install and use the Add-on solely for personal, non-commercial entertainment purposes within Microsoft Flight Simulator 2024.
+									The Author grants you a limited, non-exclusive,
+									non-transferable, royalty-free license to install and use the
+									Add-on solely for personal, non-commercial entertainment
+									purposes within Microsoft Flight Simulator 2024.
 								</p>
 							</div>
 
 							<div>
-								<h3 className="text-lg font-bold text-blue-400 mb-2">2. PERMITTED USE</h3>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">
+									2. PERMITTED USE
+								</h3>
 								<p>
-									You may install and use the Add-on on personal computers you own or control for private, non-commercial use only.
+									You may install and use the Add-on on personal computers you
+									own or control for private, non-commercial use only.
 								</p>
 							</div>
 
 							<div>
-								<h3 className="text-lg font-bold text-blue-400 mb-2">3. RESTRICTIONS</h3>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">
+									3. RESTRICTIONS
+								</h3>
 								<p className="mb-2">You may NOT:</p>
 								<ul className="list-disc list-inside space-y-1 pl-4">
 									<li>Make backup or archival copies of the Add-on.</li>
-									<li>Redistribute, sell, rent, lease, sublicense, or otherwise transfer the Add-on or any part thereof.</li>
-									<li>Modify, adapt, translate, reverse engineer, decompile, disassemble, or create derivative works based on the Add-on.</li>
-									<li>Use the Add-on for any commercial purpose, including but not limited to flight training, professional simulation, or public exhibition where admission is charged.</li>
-									<li>Remove or alter any copyright, trademark, or proprietary notices in the Add-on files.</li>
+									<li>
+										Redistribute, sell, rent, lease, sublicense, or otherwise
+										transfer the Add-on or any part thereof.
+									</li>
+									<li>
+										Modify, adapt, translate, reverse engineer, decompile,
+										disassemble, or create derivative works based on the Add-on.
+									</li>
+									<li>
+										Use the Add-on for any commercial purpose, including but not
+										limited to flight training, professional simulation, or
+										public exhibition where admission is charged.
+									</li>
+									<li>
+										Remove or alter any copyright, trademark, or proprietary
+										notices in the Add-on files.
+									</li>
 								</ul>
 							</div>
 
 							<div>
-								<h3 className="text-lg font-bold text-blue-400 mb-2">4. OWNERSHIP</h3>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">
+									4. OWNERSHIP
+								</h3>
 								<p>
-									The Add-on is licensed, not sold. The Author retains all right, title, and interest in and to the Add-on, including all intellectual property rights.
+									The Add-on is licensed, not sold. The Author retains all
+									right, title, and interest in and to the Add-on, including all
+									intellectual property rights.
 								</p>
 							</div>
 
 							<div>
-								<h3 className="text-lg font-bold text-blue-400 mb-2">5. NO WARRANTY</h3>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">
+									5. NO WARRANTY
+								</h3>
 								<p>
-									THE ADD-ON IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. THE AUTHOR DOES NOT WARRANT THAT THE ADD-ON WILL BE ERROR-FREE OR COMPATIBLE WITH FUTURE VERSIONS OF MICROSOFT FLIGHT SIMULATOR 2024.
+									THE ADD-ON IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+									EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+									WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+									PURPOSE, OR NON-INFRINGEMENT. THE AUTHOR DOES NOT WARRANT THAT
+									THE ADD-ON WILL BE ERROR-FREE OR COMPATIBLE WITH FUTURE
+									VERSIONS OF MICROSOFT FLIGHT SIMULATOR 2024.
 								</p>
 							</div>
 
 							<div>
-								<h3 className="text-lg font-bold text-blue-400 mb-2">6. LIMITATION OF LIABILITY</h3>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">
+									6. LIMITATION OF LIABILITY
+								</h3>
 								<p>
-									IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES ARISING FROM THE USE OR INABILITY TO USE THE ADD-ON.
+									IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,
+									INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY
+									DAMAGES ARISING FROM THE USE OR INABILITY TO USE THE ADD-ON.
 								</p>
 							</div>
 
 							<div>
-								<h3 className="text-lg font-bold text-blue-400 mb-2">7. TERMINATION</h3>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">
+									7. TERMINATION
+								</h3>
 								<p>
-									This license terminates automatically if you violate any term. Upon termination, you must destroy all copies of the Add-on.
+									This license terminates automatically if you violate any term.
+									Upon termination, you must destroy all copies of the Add-on.
 								</p>
 							</div>
 
 							<div>
-								<h3 className="text-lg font-bold text-blue-400 mb-2">8. GOVERNING LAW</h3>
+								<h3 className="text-lg font-bold text-blue-400 mb-2">
+									8. GOVERNING LAW
+								</h3>
 								<p>
-									This EULA shall be governed by the laws of the United States of America.
+									This EULA shall be governed by the laws of the United States
+									of America.
 								</p>
 							</div>
 
 							<div className="border-t border-white/10 pt-4 mt-6">
 								<p className="text-white/60 text-xs">
-									Copyright © 2025 Aero Dynamics Development LLC. All rights reserved.
+									Copyright ï¿½ 2025 Aero Dynamics Development LLC. All rights
+									reserved.
 								</p>
 								<p className="text-white/60 text-xs mt-1">
-									Microsoft Flight Simulator 2024 is a trademark of Microsoft Corporation.
+									Microsoft Flight Simulator 2024 is a trademark of Microsoft
+									Corporation.
 								</p>
 							</div>
 						</div>
