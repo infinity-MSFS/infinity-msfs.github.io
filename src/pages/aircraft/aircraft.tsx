@@ -374,7 +374,7 @@ export const T38ProductPage = (): JSX.Element => {
 							{isAuthenticated && user ? (
 								<div className="flex space-x-4 mb-8">
 									<a
-										href={`https://infinitymsfs.lemonsqueezy.com/buy/9f0bf9c5-fabd-47c6-bb75-4acf64f1130b?checkout[custom][auth0_user_id]=${user_id}`}
+										href={`https://infinitymsfs.lemonsqueezy.com/buy/5d93bb10-bd78-4abc-b3d7-9cbff337a7ab?checkout[custom][auth0_user_id]=${user_id}`}
 										target="_blank"
 									>
 										<button
