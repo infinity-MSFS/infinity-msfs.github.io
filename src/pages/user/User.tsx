@@ -12,7 +12,7 @@ export const UserDashboard = (): JSX.Element => {
 	const { user, isAuthenticated, isLoading, getAccessToken } = useAuth()
 
 	// TEMPORARY: Mock authentication for local testing
-	const TESTING_MODE = true; // Set to false when done testing
+	const TESTING_MODE = false; // Set to false when done testing
 	const mockUser = {
 		name: 'Test User',
 		email: 'test@example.com',
