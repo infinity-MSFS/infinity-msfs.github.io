@@ -305,9 +305,7 @@ export const UserDashboard = (): JSX.Element => {
 									Installation Instructions
 								</h4>
 								<ol className="text-sm text-white/80 space-y-2 ml-6 list-decimal">
-									<li>
-										Download the aircraft package using the button above
-									</li>
+									<li>Download the aircraft package from your email receipt</li>
 									<li>Extract the ZIP file to your MSFS Community folder</li>
 									<li>Restart Microsoft Flight Simulator</li>
 									<li>Find the T-38 Talon in your aircraft selection</li>
@@ -321,8 +319,8 @@ export const UserDashboard = (): JSX.Element => {
 				<div className="mt-8 bg-white/5 border border-white/10 rounded-xl p-6">
 					<h3 className="text-xl font-semibold mb-4">Need Help?</h3>
 					<p className="text-white/60 mb-4">
-						If you have any issues with your purchase or need technical
-						support, please reach out to us on Discord or via email.
+						If you have any issues with your purchase or need technical support,
+						please reach out to us on Discord or via email.
 					</p>
 					<div className="flex gap-4">
 						<a
@@ -355,11 +353,11 @@ export const UserDashboard = (): JSX.Element => {
 								onClick={() => {
 									setShowSupportForm(false);
 									setSupportForm({
-										name: '',
-										email: '',
-										discordName: '',
-										subject: '',
-										message: ''
+										name: "",
+										email: "",
+										discordName: "",
+										subject: "",
+										message: "",
 									});
 									setSubmitError(null);
 									setSubmitSuccess(false);
@@ -372,7 +370,9 @@ export const UserDashboard = (): JSX.Element => {
 
 						{submitSuccess && (
 							<div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4 mb-4">
-								<p className="text-green-200">Message sent successfully! We'll get back to you soon.</p>
+								<p className="text-green-200">
+									Message sent successfully! We'll get back to you soon.
+								</p>
 							</div>
 						)}
 
@@ -438,7 +438,10 @@ export const UserDashboard = (): JSX.Element => {
 									disabled={submitLoading}
 									value={supportForm.discordName}
 									onChange={(e) =>
-										setSupportForm({ ...supportForm, discordName: e.target.value })
+										setSupportForm({
+											...supportForm,
+											discordName: e.target.value,
+										})
 									}
 									className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
 									placeholder="username#1234"
@@ -499,7 +502,7 @@ export const UserDashboard = (): JSX.Element => {
 											Sending...
 										</>
 									) : (
-										'Send Message'
+										"Send Message"
 									)}
 								</button>
 								<button
@@ -508,11 +511,11 @@ export const UserDashboard = (): JSX.Element => {
 									onClick={() => {
 										setShowSupportForm(false);
 										setSupportForm({
-											name: '',
-											email: '',
-											discordName: '',
-											subject: '',
-											message: ''
+											name: "",
+											email: "",
+											discordName: "",
+											subject: "",
+											message: "",
 										});
 										setSubmitError(null);
 										setSubmitSuccess(false);
