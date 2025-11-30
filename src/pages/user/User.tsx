@@ -12,7 +12,7 @@ export const UserDashboard = (): JSX.Element => {
 	const { user, isAuthenticated, isLoading, getAccessToken } = useAuth()
 
 	// TEMPORARY: Mock authentication for local testing
-	const TESTING_MODE = false; // Set to false when done testing
+	const TESTING_MODE = true; // Set to false when done testing
 	const mockUser = {
 		name: 'Test User',
 		email: 'test@example.com',
@@ -94,7 +94,7 @@ export const UserDashboard = (): JSX.Element => {
 
 		try {
 			// For testing mode, use localhost backend
-			const API_URL = TESTING_MODE 
+			const API_URL = TESTING_MODE
 				? 'http://localhost:3000'
 				: 'https://userbackend-nameless-fog-3967.fly.dev';
 
@@ -275,7 +275,7 @@ export const UserDashboard = (): JSX.Element => {
 								</div>
 
 								<div className="flex gap-3">
-									<button
+									{/* <button
 										type="button"
 										className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-semibold"
 									>
@@ -294,7 +294,7 @@ export const UserDashboard = (): JSX.Element => {
 										className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors text-sm"
 									>
 										(Manual WIP)
-									</button>
+									</button> */}
 								</div>
 							</div>
 
