@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from "../../util/AuthContext"
-import { Download, Key, Calendar, AlertCircle, X } from 'lucide-react'
+import { Key, Calendar, AlertCircle, X } from "lucide-react";
 //import { useNavigate } from 'react-router-dom'
 
 interface ProductData {
