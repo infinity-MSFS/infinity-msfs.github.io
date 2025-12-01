@@ -1,11 +1,58 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from "../../util/AuthContext"
-import { Key, Calendar, AlertCircle, X } from "lucide-react";
+import { Key, Calendar, AlertCircle, X, Download } from "lucide-react";
 //import { useNavigate } from 'react-router-dom'
 
 interface ProductData {
 	product_key: string;
 	purchased_at: string;
+}
+
+type DownloadFile = {
+	attributes: {
+		variant_id: number;
+		download_url: string;
+		createdAt: string;
+	};
+};
+
+export function getLatestDownloadForVariant(data: any[], variantId: number) {
+	let filtered = data.filter(
+		(file) => file.attributes.variant_id === variantId,
+	);
+
+	if (filtered.length === 0) return null;
+
+	filtered = filtered.filter(
+		(file) =>
+			!file.attributes.name?.includes("Infinity_Manager") &&
+			!file.attributes.name?.includes("Infinity Manager"),
+	);
+
+	if (filtered.length === 0) return null;
+
+	filtered.sort(
+		(a, b) =>
+			new Date(b.attributes.createdAt).getTime() -
+			new Date(a.attributes.createdAt).getTime(),
+	);
+
+	return filtered[0];
+}
+
+function getLemonSqueezyExpiry(url: string): Date | null {
+	try {
+		const parsed = new URL(url);
+		const expiresStr = parsed.searchParams.get("expires");
+		if (!expiresStr) return null;
+
+		const expires = Number(expiresStr);
+		if (Number.isNaN(expires)) return null;
+
+		return new Date(expires * 1000);
+	} catch {
+		return null;
+	}
 }
 
 export const UserDashboard = (): JSX.Element => {
@@ -33,8 +80,108 @@ export const UserDashboard = (): JSX.Element => {
 	const [submitLoading, setSubmitLoading] = useState(false)
 	const [submitError, setSubmitError] = useState<string | null>(null)
 	const [submitSuccess, setSubmitSuccess] = useState(false)
+	const [showDownloadButton, setShowDownloadButton] = useState(false);
+	const [downloadLink, setDownloadLink] = useState<string | null>(null);
+	const [downloadExpiry, setDownloadExpiry] = useState<Date | null>(null);
+	const [validationVariantId, setValidationVariantId] = useState<number | null>(
+		null,
+	);
+	const [managerDownloadLink, setManagerDownloadLink] = useState<string | null>(
+		null,
+	);
+	const [managerDownloadExpiry, setManagerDownloadExpiry] =
+		useState<Date | null>(null);
+	const [managerShowDownloadButton, setManagerShowDownloadButton] =
+		useState(false);
 
 	// const nav = useNavigate()
+
+	async function fetchDownloadLink(variantId: number) {
+		try {
+			const downloadLinkResponse = await fetch(
+				"https://api.lemonsqueezy.com/v1/files",
+				{
+					method: "GET",
+					headers: {
+						Accept: "application/vnd.api+json",
+						"Content-Type": "application/vnd.api+json",
+						Authorization: `Bearer ${import.meta.env.VITE_LEMONSQUEEZY_API_KEY}`,
+					},
+				},
+			);
+
+			if (!downloadLinkResponse.ok) {
+				console.error("Failed to fetch download link");
+				return;
+			}
+
+			const downloadLinkData = await downloadLinkResponse.json();
+			const latest = getLatestDownloadForVariant(
+				downloadLinkData.data,
+				variantId,
+			);
+
+			if (!latest) return;
+
+			const expiry = getLemonSqueezyExpiry(latest.attributes.download_url);
+			setDownloadLink(latest.attributes.download_url);
+			setDownloadExpiry(expiry);
+			setShowDownloadButton(true);
+
+			console.log(
+				"Updated download link",
+				latest.attributes.download_url,
+				"Expires:",
+				expiry,
+			);
+		} catch (err) {
+			console.error("Error refreshing download link:", err);
+		}
+	}
+
+	async function refreshManagerDownload() {
+		try {
+			const res = await fetch("https://api.lemonsqueezy.com/v1/files", {
+				method: "GET",
+				headers: {
+					Accept: "application/vnd.api+json",
+					"Content-Type": "application/vnd.api+json",
+					Authorization: `Bearer ${import.meta.env.VITE_LEMONSQUEEZY_API_KEY}`,
+				},
+			});
+
+			if (!res.ok) {
+				console.error("Failed to refresh manager download link");
+				return;
+			}
+
+			const data = await res.json();
+
+			const manager = data.data.find((file: any) =>
+				file.attributes.name.includes("Infinity_Manager"),
+			);
+
+			if (!manager) {
+				console.warn("No Infinity Manager file found during refresh");
+				return;
+			}
+
+			const expiryDate = getLemonSqueezyExpiry(manager.attributes.download_url);
+
+			setManagerDownloadLink(manager.attributes.download_url);
+			setManagerDownloadExpiry(expiryDate);
+			setManagerShowDownloadButton(true);
+
+			console.log(
+				"Updated Manager Download link:",
+				manager.attributes.download_url,
+				"Expires:",
+				expiryDate,
+			);
+		} catch (err) {
+			console.error("Manager refresh error:", err);
+		}
+	}
 
 	useEffect(() => {
 		const fetchProductKey = async () => {
@@ -71,6 +218,95 @@ export const UserDashboard = (): JSX.Element => {
 						setProductData(null);
 					} else {
 						setProductData(data);
+
+						const valodationKeyResponse = await fetch(
+							"https://api.lemonsqueezy.com/v1/licenses/validate",
+							{
+								method: "POST",
+								headers: {
+									"Content-Type": "application/json",
+									Accept: "application/json",
+								},
+								body: JSON.stringify({
+									license_key: data.product_key,
+								}),
+							},
+						);
+
+						if (!valodationKeyResponse.ok) {
+							console.error("Failed to validate license key");
+						} else {
+							const validationData = await valodationKeyResponse.json();
+							if (validationData.valid) {
+								let variantId = validationData.meta.variant_id;
+								setValidationVariantId(variantId);
+								let downloadLinkResponse = await fetch(
+									"https://api.lemonsqueezy.com/v1/files",
+									{
+										method: "GET",
+										headers: {
+											Accept: "application/vnd.api+json",
+											"Content-Type": "application/vnd.api+json",
+											Authorization: `Bearer ${import.meta.env.VITE_LEMONSQUEEZY_API_KEY}`,
+										},
+									},
+								);
+
+								if (!downloadLinkResponse.ok) {
+									console.error("Failed to fetch download link");
+								} else {
+									const downloadLinkData = await downloadLinkResponse.json();
+									// Find the manager download link
+									let managerDownload = downloadLinkData.data.find(
+										(file: any) =>
+											file.attributes.name.includes("Infinity_Manager"),
+									);
+
+									if (managerDownload) {
+										const expiryDate = getLemonSqueezyExpiry(
+											managerDownload.attributes.download_url,
+										);
+										setManagerDownloadExpiry(expiryDate);
+										setManagerDownloadLink(
+											managerDownload.attributes.download_url,
+										);
+										setManagerShowDownloadButton(true);
+									}
+
+									console.log("Download link:", downloadLinkData);
+
+									const latest = getLatestDownloadForVariant(
+										downloadLinkData.data,
+										variantId,
+									);
+
+									if (latest) {
+										const expiryDate = getLemonSqueezyExpiry(
+											latest.attributes.download_url,
+										);
+
+										console.log(
+											"Latest download file:",
+											latest.attributes.download_url,
+											"Made at:",
+											latest.attributes.createdAt,
+											"Expires at:",
+											expiryDate,
+										);
+										setDownloadLink(latest.attributes.download_url);
+										setShowDownloadButton(true);
+										setDownloadExpiry(expiryDate);
+									} else {
+										console.log(
+											"No download links found for variant",
+											variantId,
+										);
+									}
+								}
+							} else {
+								console.error("License key is invalid");
+							}
+						}
 					}
 				}
 			} catch (err) {
@@ -79,10 +315,72 @@ export const UserDashboard = (): JSX.Element => {
 			} finally {
 				setFetchLoading(false);
 			}
+
+	const handleSupportSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		setSubmitLoading(true);
+		setFetchLoading(false);
+	};
 		};
 
 		fetchProductKey();
 	}, [isAuthenticated, user, getAccessToken]);
+
+
+
+	useEffect(() => {
+		if (!downloadExpiry) return;
+		if (!validationVariantId) return;
+
+		const now = Date.now();
+		const expiry = downloadExpiry.getTime();
+
+		const refreshTime = expiry - now - 2 * 60 * 1000;
+
+		if (refreshTime <= 0) {
+			console.log("Download link expired — refreshing immediately");
+			if (productData) {
+				fetchDownloadLink(validationVariantId);
+			}
+			return;
+		}
+
+		console.log(`Scheduling download link refresh in ${refreshTime}ms`);
+
+		const timer = setTimeout(() => {
+			if (productData) {
+				console.log("Refreshing download link due to expiry");
+				fetchDownloadLink(validationVariantId);
+			}
+		}, refreshTime);
+
+		return () => clearTimeout(timer);
+	}, [downloadExpiry]);
+
+	useEffect(() => {
+		if (!managerDownloadExpiry) return;
+
+		const now = Date.now();
+		const expiry = managerDownloadExpiry.getTime();
+
+		const refreshTime = expiry - now - 2 * 60 * 1000;
+
+		if (refreshTime <= 0) {
+			console.log("Manager download link expired — refreshing immediately");
+			refreshManagerDownload();
+			return;
+		}
+
+		console.log(`Scheduling manager link refresh in ${refreshTime}ms`);
+
+		const timer = setTimeout(() => {
+			console.log("Refreshing manager download link due to expiry");
+			refreshManagerDownload();
+		}, refreshTime);
+
+		return () => clearTimeout(timer);
+	}, [managerDownloadExpiry]);
+
 
 	const handleSupportSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -275,21 +573,37 @@ export const UserDashboard = (): JSX.Element => {
 								</div>
 
 								<div className="flex gap-3">
-									{/* <button
-										type="button"
-										className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-semibold"
-									>
-										<Download className="w-4 h-4" />
-										Download
-									</button>
-									<button
-										type="button"
-										className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors text-sm"
-									>
-										<Download className="w-4 h-4" />
-										Download Data Cartridge Companion
-									</button>
-									<button
+									{showDownloadButton && downloadLink && (
+										<a
+											href={downloadLink}
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											<button
+												type="button"
+												className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-semibold"
+											>
+												<Download className="w-4 h-4" />
+												Download
+											</button>
+										</a>
+									)}
+									{managerShowDownloadButton && managerDownloadLink && (
+										<a
+											href={managerDownloadLink}
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											<button
+												type="button"
+												className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors text-sm"
+											>
+												<Download className="w-4 h-4" />
+												Download Data Cartridge Companion
+											</button>
+										</a>
+									)}
+									{/*<button
 										type="button"
 										className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors text-sm"
 									>
@@ -305,7 +619,7 @@ export const UserDashboard = (): JSX.Element => {
 									Installation Instructions
 								</h4>
 								<ol className="text-sm text-white/80 space-y-2 ml-6 list-decimal">
-									<li>Download the aircraft package from your email receipt</li>
+									<li>Download the aircraft package</li>
 									<li>Extract the ZIP file to your MSFS Community folder</li>
 									<li>Restart Microsoft Flight Simulator</li>
 									<li>Find the T-38 Talon in your aircraft selection</li>
