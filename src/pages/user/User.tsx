@@ -8,13 +8,6 @@ interface ProductData {
 	purchased_at: string;
 }
 
-type DownloadFile = {
-	attributes: {
-		variant_id: number;
-		download_url: string;
-		createdAt: string;
-	};
-};
 
 export function getLatestDownloadForVariant(data: any[], variantId: number) {
 	let filtered = data.filter(
@@ -316,11 +309,6 @@ export const UserDashboard = (): JSX.Element => {
 				setFetchLoading(false);
 			}
 
-	const handleSupportSubmit = async (e: React.FormEvent) => {
-		e.preventDefault();
-		setSubmitLoading(true);
-		setFetchLoading(false);
-	};
 		};
 
 		fetchProductKey();
