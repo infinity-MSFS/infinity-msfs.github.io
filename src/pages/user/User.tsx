@@ -415,7 +415,6 @@ export const UserDashboard = (): JSX.Element => {
 				throw new Error(errorData.error || 'Failed to send message');
 			}
 
-			// Success
 			setSubmitSuccess(true);
 
 			// Reset form after 2 seconds
