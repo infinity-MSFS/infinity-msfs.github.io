@@ -31,7 +31,7 @@ export const About = (): JSX.Element => {
 				<span className="text-sm font-medium">GitHub Repository</span>
 			</a>
 			<a
-				href="https://discord.gg/mJ3BUgyTAQ"
+				href="https://discord.gg/jEemXDWH"
 				target="_blank"
 				rel="noopener noreferrer"
 				className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5865F2]/10 hover:bg-[#5865F2]/20 transition-colors border border-[#5865F2]/20 hover:border-[#5865F2]/40"
