@@ -76,6 +76,9 @@ export const UserDashboard = (): JSX.Element => {
 	const [showDownloadButton, setShowDownloadButton] = useState(false);
 	const [downloadLink, setDownloadLink] = useState<string | null>(null);
 	const [downloadExpiry, setDownloadExpiry] = useState<Date | null>(null);
+	const [downloadButtonVersion, setDownloadButtonVersion] = useState<
+		string | null
+	>(null);
 	const [validationVariantId, setValidationVariantId] = useState<number | null>(
 		null,
 	);
@@ -117,6 +120,7 @@ export const UserDashboard = (): JSX.Element => {
 			if (!latest) return;
 
 			const expiry = getLemonSqueezyExpiry(latest.attributes.download_url);
+			setDownloadButtonVersion(latest.attributes.version);
 			setDownloadLink(latest.attributes.download_url);
 			setDownloadExpiry(expiry);
 			setShowDownloadButton(true);
@@ -266,7 +270,7 @@ export const UserDashboard = (): JSX.Element => {
 										setManagerShowDownloadButton(true);
 									}
 
-									console.log("Download link:", downloadLinkData);
+									//console.log("Download link:", downloadLinkData);
 
 									const latest = getLatestDownloadForVariant(
 										downloadLinkData.data,
@@ -278,14 +282,7 @@ export const UserDashboard = (): JSX.Element => {
 											latest.attributes.download_url,
 										);
 
-										console.log(
-											"Latest download file:",
-											latest.attributes.download_url,
-											"Made at:",
-											latest.attributes.createdAt,
-											"Expires at:",
-											expiryDate,
-										);
+										setDownloadButtonVersion(latest.attributes.version);
 										setDownloadLink(latest.attributes.download_url);
 										setShowDownloadButton(true);
 										setDownloadExpiry(expiryDate);
@@ -571,7 +568,10 @@ export const UserDashboard = (): JSX.Element => {
 												className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-semibold"
 											>
 												<Download className="w-4 h-4" />
-												Download
+												Download{" "}
+												{downloadButtonVersion
+													? `v${downloadButtonVersion}`
+													: "Latest"}
 											</button>
 										</a>
 									)}
