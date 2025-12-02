@@ -11,6 +11,7 @@ import {
 	Play,
 	Pause,
 	Shield,
+	Youtube,
 } from "lucide-react";
 import { useAuth } from "../../util/AuthContext";
 
@@ -123,9 +124,8 @@ export const T38ProductPage = (): JSX.Element => {
 					<div className="space-y-4 relative z-10">
 						{/** biome-ignore lint/a11y/noStaticElementInteractions: needed */}
 						<div
-							className={`aspect-video bg-white/5 rounded-xl overflow-hidden border border-white/10 relative group ${
-								currentMedia.type === "image" ? "cursor-zoom-in" : ""
-							}`}
+							className={`aspect-video bg-white/5 rounded-xl overflow-hidden border border-white/10 relative group ${currentMedia.type === "image" ? "cursor-zoom-in" : ""
+								}`}
 							onClick={handleImageClick}
 						>
 							{currentMedia.type === "video" ? (
@@ -141,9 +141,8 @@ export const T38ProductPage = (): JSX.Element => {
 									<img
 										src={currentMedia.url}
 										alt="T-38 Talon"
-										className={`w-full h-full object-cover transition-all duration-600 group-hover:scale-105 ${
-											isTransitioning ? "opacity-0" : "opacity-100"
-										}`}
+										className={`w-full h-full object-cover transition-all duration-600 group-hover:scale-105 ${isTransitioning ? "opacity-0" : "opacity-100"
+											}`}
 										style={{
 											transition:
 												"opacity 0.6s ease-in-out, transform 0.3s ease",
@@ -195,11 +194,10 @@ export const T38ProductPage = (): JSX.Element => {
 									// biome-ignore lint/suspicious/noArrayIndexKey: perfectly fine in this implementaiton
 									key={index}
 									onClick={() => handleThumbnailClick(index)}
-									className={`aspect-video rounded-lg overflow-hidden border-2 transition-all transform hover:scale-105 ${
-										selectedImage === index
+									className={`aspect-video rounded-lg overflow-hidden border-2 transition-all transform hover:scale-105 ${selectedImage === index
 											? "border-blue-400 shadow-lg shadow-blue-400/50"
 											: "border-white/20 hover:border-white/40"
-									}`}
+										}`}
 								>
 									<img
 										src={item.type === "video" ? item.thumbnail : item.url}
@@ -302,9 +300,8 @@ export const T38ProductPage = (): JSX.Element => {
 								<img
 									src={media[selectedImage].url}
 									alt="T-38 Talon Full Resolution"
-									className={`max-w-full max-h-[95vh] w-auto h-auto object-contain rounded-lg shadow-2xl transition-opacity duration-600 ${
-										isTransitioning ? "opacity-0" : "opacity-100"
-									}`}
+									className={`max-w-full max-h-[95vh] w-auto h-auto object-contain rounded-lg shadow-2xl transition-opacity duration-600 ${isTransitioning ? "opacity-0" : "opacity-100"
+										}`}
 								/>
 							</div>
 
@@ -320,11 +317,10 @@ export const T38ProductPage = (): JSX.Element => {
 												e.stopPropagation();
 												handleThumbnailClick(index);
 											}}
-											className={`flex-shrink-0 w-16 h-16 rounded border-2 overflow-hidden transition-all relative ${
-												selectedImage === index
+											className={`flex-shrink-0 w-16 h-16 rounded border-2 overflow-hidden transition-all relative ${selectedImage === index
 													? "border-blue-400 scale-110"
 													: "border-white/30 hover:border-white/60"
-											}`}
+												}`}
 										>
 											<img
 												src={item.type === "video" ? item.thumbnail : item.url}
@@ -473,7 +469,7 @@ export const T38ProductPage = (): JSX.Element => {
 					<h2 className="text-2xl font-bold mb-6 text-center">
 						Support & Community
 					</h2>
-					<div className="grid md:grid-cols-2 gap-8">
+					<div className="grid md:grid-cols-3 gap-8">
 						<div className="text-center">
 							<MessageCircle className="w-12 h-12 mx-auto mb-4 text-blue-400" />
 							<h3 className="text-xl font-semibold mb-2">Discord Server</h3>
@@ -487,6 +483,21 @@ export const T38ProductPage = (): JSX.Element => {
 								className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition-colors"
 							>
 								Join Discord
+							</a>
+						</div>
+						<div className="text-center">
+							<Youtube className="w-12 h-12 mx-auto mb-4 text-red-400" />
+							<h3 className="text-xl font-semibold mb-2">Video Tutorials</h3>
+							<p className="text-white/60 mb-4">
+								Watch step-by-step tutorials and flight demonstrations
+							</p>
+							<a
+								href="https://www.youtube.com/playlist?list=PLWPZkM27p6Xuvn9ODILcc4V2K1F8olHge"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="inline-block bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg transition-colors"
+							>
+								Watch Tutorials
 							</a>
 						</div>
 						<div className="text-center">
