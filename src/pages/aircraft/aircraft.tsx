@@ -504,7 +504,7 @@ export const T38ProductPage = (): JSX.Element => {
 							<FileText className="w-12 h-12 mx-auto mb-4 text-green-400" />
 							<h3 className="text-xl font-semibold mb-2">Flight Manual</h3>
 							<p className="text-white/60 mb-4">
-								Comprehensive documentation and procedures guide
+                                Comprehensive documentation and procedures guide. The guide is WIP and not currently available.
 							</p>
 							<button
 								type="button"
