@@ -1,79 +1,166 @@
-import { Icons, AboutComponent } from "./aboutComponents";
+import {
+	Cog,
+	Plane,
+	RefreshCw,
+	Download,
+	Monitor,
+	Workflow,
+} from "lucide-react";
 
 export const About = (): JSX.Element => {
 	return (
-		<div className=" pt-8 flex flex-col items-center justify-center">
-			<div
-				style={{ textShadow: "white 1px 0 70px" }}
-				className="text-4xl text-center font-bold my-8"
-			>
-				The Infinity Launcher
-			</div>
-			<div className="text-center text-lg max-w-2xl px-4">
-				The Infinity Launcher is a powerful tool designed to enhance your
-				Microsoft Flight Simulator experience. It simplifies the process of
-				installing and managing aircraft packages, ensuring you can focus on
-				flying rather than troubleshooting. With its user-friendly interface and
-				robust features, the Infinity Launcher is your go-to solution for all
-				your flight sim needs.
-			</div>
-			<div className="flex gap-4 mt-6 mb-2">
-                <a
-				href="https://github.com/infinity-MSFS/InfinityLauncher"
-				target="_blank"
-				rel="noopener noreferrer"
-				className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-white/10 hover:border-white/20"
-			>
-				<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-					<title>GitHub</title>
-					<path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-				</svg>
-				<span className="text-sm font-medium">GitHub Repository</span>
-			</a>
-			<a
-				href="https://discord.gg/jEemXDWH"
-				target="_blank"
-				rel="noopener noreferrer"
-				className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5865F2]/10 hover:bg-[#5865F2]/20 transition-colors border border-[#5865F2]/20 hover:border-[#5865F2]/40"
-			>
-				<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-					<title>Discord</title>
-					<path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-				</svg>
-				<span className="text-sm font-medium">Discord</span>
-			</a>
-		</div>
-			<div className="flex pt-6 flex-row flex-wrap gap-y-8 items-center justify-center max-w-7xl">
-				<AboutComponent
-					title="Pure C++ 26"
-					colors={[[0, 76, 246]]}
-					icon={<Icons type="c++" />}
-				/>
-				<AboutComponent
-					title="Cross Platform"
-					colors={[[240, 168, 0]]}
-					icon={<Icons type="linux" />}
-				/>
-				<AboutComponent
-					title="Simconnect support"
-					colors={[[130, 155, 185]]}
-					icon={<Icons type="airplane" />}
-				/>
-				<AboutComponent
-					title="Automatically locate Community Folder"
-					colors={[[155, 45, 250]]}
-					icon={<Icons type="folder" />}
-				/>
-				<AboutComponent
-					title="Automatic Updates"
-					colors={[[50, 150, 255]]}
-					icon={<Icons type="sync" />}
-				/>
-				<AboutComponent
-					title="Fragmented Downloads"
-					colors={[[255, 220, 45]]}
-					icon={<Icons type="fragment" />}
-				/>
+		<div className="min-h-screen text-white py-12 px-4">
+			<div className="max-w-7xl mx-auto">
+				{/* Header */}
+				<div className="text-center mb-12">
+					<h1
+						style={{ textShadow: "white 1px 0 70px" }}
+						className="text-5xl font-bold mb-4"
+					>
+						The Infinity Manager
+					</h1>
+					<p className="text-xl text-white/80">
+						Optional addon configurator for Infinity aircraft
+					</p>
+				</div>
+
+				<div className="grid lg:grid-cols-2 gap-12 mb-16">
+					<div className="space-y-4">
+						<div className="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl bg-white/5">
+							<img
+								src="/manager.png"
+								alt="Infinity Manager Interface"
+								className="w-full h-auto"
+							/>
+						</div>
+					</div>
+
+					<div className="space-y-6 relative z-10">
+						<div>
+							<h2 className="text-3xl font-bold mb-4">About the Manager</h2>
+							<p className="text-white/90 leading-relaxed mb-6">
+								The Infinity Manager is an optional addon configurator designed
+								to unlock the full potential of Infinity aircraft. While your
+								aircraft work perfectly without it, the Manager provides
+								advanced features like addon configuration, seamless updates,
+								P2P multiplayer support, and powerful utilities that enhance
+								your flying experience.
+							</p>
+							<p className="text-white/90 leading-relaxed mb-6">
+								Built from the ground up in Rust for blazing-fast performance,
+								memory safety, and rock-solid reliability, the Manager delivers
+								a smooth and responsive experience every time you use it.
+							</p>
+							<div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mb-6">
+								<p className="text-blue-300 text-sm">
+									The Manager comes standard with the purchase of any Infinity
+									aircraft and will be made publicly available once our free
+									addons are released.
+								</p>
+							</div>
+							<div className="flex gap-4">
+								<a
+									href="https://discord.gg/jEemXDWH"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center gap-2 px-6 py-3 rounded-lg bg-[#5865F2]/10 hover:bg-[#5865F2]/20 transition-colors border border-[#5865F2]/20 hover:border-[#5865F2]/40"
+								>
+									<svg
+										className="w-5 h-5"
+										fill="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<title>Discord</title>
+										<path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+									</svg>
+									<span className="text-sm font-medium">Join Discord</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className="mt-16">
+					<h2 className="text-3xl font-bold mb-8 text-center">Key Features</h2>
+					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+						<div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/20 transition-colors">
+							<div className="flex items-center gap-4 mb-4">
+								<div className="bg-orange-500/20 p-3 rounded-lg">
+									<Workflow className="w-8 h-8 text-orange-400" />
+								</div>
+								<h3 className="text-xl font-semibold">Pure Rust</h3>
+							</div>
+							<p className="text-white/70">
+								Built from the ground up in Rust for blazing-fast performance,
+								memory safety, and rock-solid reliability.
+							</p>
+						</div>
+
+						<div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/20 transition-colors">
+							<div className="flex items-center gap-4 mb-4">
+								<div className="bg-purple-500/20 p-3 rounded-lg">
+									<Cog className="w-8 h-8 text-purple-400" />
+								</div>
+								<h3 className="text-xl font-semibold">Addon Configuration</h3>
+							</div>
+							<p className="text-white/70">
+								Fine-tune every aspect of your aircraft addons with an intuitive
+								configuration interface.
+							</p>
+						</div>
+
+						<div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/20 transition-colors">
+							<div className="flex items-center gap-4 mb-4">
+								<div className="bg-blue-500/20 p-3 rounded-lg">
+									<Plane className="w-8 h-8 text-blue-400" />
+								</div>
+								<h3 className="text-xl font-semibold">P2P Multiplayer</h3>
+							</div>
+							<p className="text-white/70">
+								Connect directly with other pilots using peer-to-peer
+								multiplayer technology for synchronized flying.
+							</p>
+						</div>
+
+						<div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/20 transition-colors">
+							<div className="flex items-center gap-4 mb-4">
+								<div className="bg-cyan-500/20 p-3 rounded-lg">
+									<RefreshCw className="w-8 h-8 text-cyan-400" />
+								</div>
+								<h3 className="text-xl font-semibold">Automatic Updates</h3>
+							</div>
+							<p className="text-white/70">
+								Stay up-to-date effortlessly with seamless automatic updates for
+								all your Infinity aircraft.
+							</p>
+						</div>
+
+						<div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/20 transition-colors">
+							<div className="flex items-center gap-4 mb-4">
+								<div className="bg-yellow-500/20 p-3 rounded-lg">
+									<Download className="w-8 h-8 text-yellow-400" />
+								</div>
+								<h3 className="text-xl font-semibold">Fragmented Downloads</h3>
+							</div>
+							<p className="text-white/70">
+								Intelligent download management with fragmentation for faster,
+								more reliable addon installations.
+							</p>
+						</div>
+
+						<div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/20 transition-colors">
+							<div className="flex items-center gap-4 mb-4">
+								<div className="bg-amber-500/20 p-3 rounded-lg">
+									<Monitor className="w-8 h-8 text-amber-400" />
+								</div>
+								<h3 className="text-xl font-semibold">Cross Platform</h3>
+							</div>
+							<p className="text-white/70">
+								Available on Windows and Linux, ensuring all pilots can access
+								the full Infinity experience.
+							</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

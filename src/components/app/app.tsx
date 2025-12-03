@@ -33,7 +33,7 @@ export const App = (): JSX.Element => {
 								buttons={[
 									{ string: "Home", to: "/" },
 									{ string: "Aircraft", to: "/aircraft" },
-									{ string: "Launcher", to: "/about" },
+									{ string: "Manager", to: "/about" },
 								]}
 							/>
 						)}
