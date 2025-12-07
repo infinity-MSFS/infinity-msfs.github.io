@@ -477,7 +477,7 @@ export const T38ProductPage = (): JSX.Element => {
 								Join our community for support, updates, and discussions
 							</p>
 							<a
-								href="https://discord.gg/jEemXDWH"
+								href="https://discord.gg/HZt4MCEYZk"
 								target="_blank"
 								rel="noopener noreferrer"
 								className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition-colors"

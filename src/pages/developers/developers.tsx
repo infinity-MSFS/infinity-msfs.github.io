@@ -41,7 +41,7 @@ export const Developers = (): JSX.Element => {
 					Watch this brief video tutorial on using the group manager. Effective
 					communication is essential for us to review your pull requests for
 					assets and group information, so please join our
-					<a className="text-blue-400" href="https://discord.gg/jEemXDWH">
+					<a className="text-blue-400" href="https://discord.gg/HZt4MCEYZk">
 						Discord
 					</a>
 					.

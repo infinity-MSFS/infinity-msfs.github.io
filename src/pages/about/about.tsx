@@ -60,7 +60,7 @@ export const About = (): JSX.Element => {
 							</div>
 							<div className="flex gap-4">
 								<a
-									href="https://discord.gg/jEemXDWH"
+									href="https://discord.gg/HZt4MCEYZk"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="flex items-center gap-2 px-6 py-3 rounded-lg bg-[#5865F2]/10 hover:bg-[#5865F2]/20 transition-colors border border-[#5865F2]/20 hover:border-[#5865F2]/40"

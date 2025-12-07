@@ -625,7 +625,7 @@ export const UserDashboard = (): JSX.Element => {
 					</p>
 					<div className="flex gap-4">
 						<a
-							href="https://discord.gg/jEemXDWH"
+							href="https://discord.gg/HZt4MCEYZk"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition-colors text-sm font-semibold"
