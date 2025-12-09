@@ -11,6 +11,7 @@ import { UserDashboard } from "../../pages/user/User";
 import PurchaseSuccess from "../../pages/purchaseSuccess/PurchaseSuccess";
 import PurchaseCancelled from "../../pages/purchaseCancelled/purchaseCancelled";
 import { useWebGLSupport } from "../../util/useWebGLSupport";
+import { Opportunity } from "../../pages/opprotunity/opportunity";
 
 export const App = (): JSX.Element => {
 	const loc = useLocation();
@@ -44,6 +45,7 @@ export const App = (): JSX.Element => {
 				<Route path="/user" element={<UserDashboard />} />
 				<Route path="/purchase-success" element={<PurchaseSuccess />} />
 				<Route path="/purchase-cancelled" element={<PurchaseCancelled />} />
+				<Route path="/careers" element={<Opportunity />} />
 			</Routes>
 		</div>
 	);
