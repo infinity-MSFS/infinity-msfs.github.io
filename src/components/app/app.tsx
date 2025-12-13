@@ -14,64 +14,62 @@ import { useWebGLSupport } from "../../util/useWebGLSupport";
 import { Opportunity } from "../../pages/opprotunity/opportunity";
 
 export const App = (): JSX.Element => {
-	const loc = useLocation();
-	const { isLowPerformance, isLoading } = useWebGLSupport();
+  const loc = useLocation();
+  const { isLowPerformance, isLoading } = useWebGLSupport();
 
-	useEffect(() => {
-		if (location.hash === "#/") {
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "auto";
-		}
-	}, [loc.hash]);
+  useEffect(() => {
+    if (location.pathname === "/") {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [loc.pathname]);
 
-	const content = (
-		<div className="h-screen w-screen dark:bg-black/90 dark:bg-dot-white/[0.2] overflow-y-auto overflow-x-hidden bg-dot-black/[0.2] relative">
-			{location.hash !== "#/" && (
-				<Navbar
-					opacity={90}
-					buttons={[
-						{ string: "Home", to: "/" },
-						{ string: "Aircraft", to: "/aircraft" },
-						{ string: "Manager", to: "/about" },
-					]}
-				/>
-			)}
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/about" element={<About />} />
-				<Route path="/developer" element={<Developers />} />
-				<Route path="/aircraft" element={<T38ProductPage />} />
-				<Route path="/user" element={<UserDashboard />} />
-				<Route path="/purchase-success" element={<PurchaseSuccess />} />
-				<Route path="/purchase-cancelled" element={<PurchaseCancelled />} />
-				<Route path="/careers" element={<Opportunity />} />
-			</Routes>
-		</div>
-	);
+  const content = (
+    <div className="h-screen w-screen dark:bg-black/90 dark:bg-dot-white/[0.2] overflow-y-auto overflow-x-hidden bg-dot-black/[0.2] relative">
+      {location.pathname !== "/" && (
+        <Navbar
+          opacity={90}
+          buttons={[
+            { string: "Home", to: "/" },
+            { string: "Aircraft", to: "/aircraft" },
+            { string: "Manager", to: "/about" },
+          ]}
+        />
+      )}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/developer" element={<Developers />} />
+        <Route path="/aircraft" element={<T38ProductPage />} />
+        <Route path="/user" element={<UserDashboard />} />
+        <Route path="/purchase-success" element={<PurchaseSuccess />} />
+        <Route path="/purchase-cancelled" element={<PurchaseCancelled />} />
+        <Route path="/careers" element={<Opportunity />} />
+      </Routes>
+    </div>
+  );
 
-	// Show simple background while detecting WebGL capabilities
-	if (isLoading) {
-		return (
-			<AuthProvider>
-				<div className="bg-gray-900 min-h-screen">
-					{content}
-				</div>
-			</AuthProvider>
-		);
-	}
+  // Show simple background while detecting WebGL capabilities
+  if (isLoading) {
+    return (
+      <AuthProvider>
+        <div className="bg-gray-900 min-h-screen">{content}</div>
+      </AuthProvider>
+    );
+  }
 
-	return (
-		<AuthProvider>
-			{isLowPerformance ? (
-				<div className="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 min-h-screen">
-					{content}
-				</div>
-			) : (
-				<BackgroundGradientAnimation interactive={false}>
-					{content}
-				</BackgroundGradientAnimation>
-			)}
-		</AuthProvider>
-	);
+  return (
+    <AuthProvider>
+      {isLowPerformance ? (
+        <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 min-h-screen">
+          {content}
+        </div>
+      ) : (
+        <BackgroundGradientAnimation interactive={false}>
+          {content}
+        </BackgroundGradientAnimation>
+      )}
+    </AuthProvider>
+  );
 };
